@@ -1,0 +1,59 @@
+<!-- Generated template for the OrderCardComponent component -->
+<div>
+
+  <div class="white-bg">
+    <div class="a3-container a3-items-center a3-justify-between border-bottom">
+      <div class="a3-container a3-items-center">
+        <div class="order-id">
+          Order #{{mOrder.order_id}}
+        </div>
+
+        <div class="number-customer">
+          <ion-icon name="ios-person-outline"></ion-icon>
+          <span class="margin-left-6">{{mOrder.number_customer}}</span>
+        </div>
+      </div>
+
+      <div class="btn-end">
+        <button ion-button clear icon-only (click)="onClickMore()">
+          <ion-icon name="md-more"></ion-icon>
+        </button>
+      </div>
+
+    </div>
+
+    <ion-row align-items-center>
+      <ion-col col-6>
+        <div class="table-container">
+          <div class="bold font-big">{{mOrder.mTable.name}}</div>
+          <div class="font-small">{{mOrder.mTable.floor_id | floorName}}</div>
+        </div>
+      </ion-col>
+      <ion-col col-6>
+        <div class="price-container">
+          <div class="bold font-big">{{mOrder.total_money | number}}</div>
+          <div class="font-small">
+            <ion-icon name="ios-clock-outline"></ion-icon>
+            <span>{{mOrder.time_created | timeServe}}</span>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <div class="a3-container a3-items-center a3-justify-between border-top">
+      <div class="a3-container a3-items-center button-bottom">
+        <button ion-button clear text-uppercase (click)="onClickAddFood()">Thêm món</button>
+        <button ion-button clear text-uppercase (click)="onClickServe()">Trả món</button>
+      </div>
+
+      <div class="a3-container a3-items-center button-bottom-icon">
+        <button ion-button clear icon-only (click)="onClickCash()">
+          <ion-icon name="ios-cash-outline"></ion-icon>
+        </button>
+        <button ion-button clear icon-only (click)="onClickClipboard()">
+            <ion-icon name="ios-clipboard-outline"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

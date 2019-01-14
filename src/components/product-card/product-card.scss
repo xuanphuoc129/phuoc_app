@@ -1,0 +1,55 @@
+product-card {
+  .pro-thumnail {
+    height: 36px;
+    width: 36px;
+    border: 1px solid map-get($map: $appColors, $key: gray);
+    border-radius: 50%;
+  }
+
+  .text-container {
+    margin-left: 16px;
+  }
+
+  .product-name {
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: map-get($map: $appColors, $key: dark);
+  }
+
+  .product-price {
+    margin-top: 4px;
+    font-size: 1.1rem;
+    color: map-get($map: $appColors, $key: orange);
+    font-weight: 500;
+  }
+
+  .product-container {
+    padding: 16px 10px 16px 10px;
+    border: 1px solid map-get($map: $appColors, $key: second);
+    border-radius: 5px;
+    background: white;
+  }
+
+  .bottom {
+    top: 100%;
+    right: 10px;
+    transform: translateY(-50%);
+    position: absolute;
+
+    .button-text {
+      min-width: 60px;
+      border-color: map-get($map: $appColors, $key: second);
+      color: map-get($map: $appColors, $key: dark);
+      background: white;
+    }
+    .button-remove{
+      background: map-get($map: $appColors, $key: red);
+    }
+    .button-remove{
+      background: map-get($map: $appColors, $key: red);
+    }
+    
+  }
+
+}

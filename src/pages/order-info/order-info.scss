@@ -1,0 +1,123 @@
+page-order-info {
+  .item-block-container {
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba($color: #000000, $alpha: .16);
+    text-align: center;
+    padding: 16px;
+    color: #086023;
+
+    .table-name {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+  }
+
+  .font-p-list {
+    font-size: 1.5rem;
+    color: map-get($map: $appColors, $key: gray);
+    margin-top: 16px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    padding-left: 5px;
+  }
+
+  .add-btn-container {
+    .button {
+      border-radius: 50%;
+      height: 48px;
+      width: 48px;
+      box-shadow: 0 6px 12px rgba($color: map-get($map: $appColors, $key: primary), $alpha: .4);
+    }
+  }
+
+  .text-btn {
+    color: map-get($map: $appColors, $key: primary);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+
+  .searchOrder {
+    height: 48px;
+    border: 1px solid map-get($map: $appColors, $key: second);
+    background: white;
+    box-shadow: 0 3px 6px rgba($color: #BAC1D5, $alpha: .16);
+    margin: 16px 5px;
+    border-radius: 5px;
+    padding: 0 10px;
+    position: relative;
+    .order-id{
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #000000;
+    }
+    .icon-search{
+      color: map-get($map: $appColors, $key: second);
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .time-serve{
+      color: #086023;
+      font-size: 1.3rem;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+
+  .pro-thumnail {
+    height: 36px;
+    width: 36px;
+    border: 1px solid map-get($map: $appColors, $key: gray);
+    border-radius: 50%;
+  }
+
+  .text-container {
+    margin-left: 16px;
+  }
+
+  .product-name {
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: map-get($map: $appColors, $key: dark);
+  }
+
+  .product-price {
+    margin-top: 4px;
+    font-size: 1.1rem;
+    color: map-get($map: $appColors, $key: orange);
+    font-weight: 500;
+  }
+
+  .product-container {
+    padding: 10px;
+    border: 1px solid map-get($map: $appColors, $key: second);
+    border-radius: 5px;
+    background: white;
+    margin-top: 16px;
+  }
+
+  .stt{
+    min-width: 20px;
+  }
+
+  .btn-delete{
+    .button{
+      color: map-get($map: $appColors, $key: gray);
+    }
+  }
+
+  .btn-save-container{
+    .button{
+      background: white;
+    }
+  }
+
+}

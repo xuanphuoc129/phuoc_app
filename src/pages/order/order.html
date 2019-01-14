@@ -1,0 +1,47 @@
+<!--
+  Generated template for the OrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar>
+    <div class="a3-container a3-items-center res-name-header-container">
+      <ion-icon name="ios-restaurant-outline"></ion-icon>
+      <div class="res-name-header">{{mAppModule.getRestaurantOfUser().name}}</div>
+    </div>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="a3-container a3-items-center a3-justify-between row-text-title">
+    <div class="font-big bold">Danh sách order</div>
+    <div class="a3-container a3-items-center a3-justify-end select-title-box-shadow" (click)="onClickOrderList()">
+      <span class="green-color">{{filter_text}}</span>
+      <ion-icon class="icon-margin" name="ios-arrow-down"></ion-icon>
+    </div>
+  </div>
+
+  <div margin-top>
+    <ion-searchbar placeholder="Nhập tên bàn hoặc mã order"></ion-searchbar>
+  </div>
+
+  <div class="empty-order" [hidden]="mOrders.length > 0" text-center>
+    Chưa có order nào!
+  </div>
+
+  <div class="order-list">
+    <div class="order-container-component" *ngFor="let order of mOrders">
+      <order-card [order]="order" ></order-card>
+    </div>
+  </div>
+
+  <ion-fab bottom right class="animated bounceInUp">
+    <button ion-fab (click)="onClickAdd()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

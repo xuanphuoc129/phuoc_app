@@ -1,0 +1,72 @@
+order-card {
+  .white-bg {
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 2px 4px rgba($color: #BAC1D5, $alpha: .16);
+  }
+
+  .border-bottom {
+    border-bottom: 1px solid #F8F8F8;
+
+    padding-left: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .border-top {
+    border-top: 1px solid #F8F8F8;
+  }
+
+  .order-id {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  .number-customer {
+    margin-left: 32px;
+
+    ion-icon {
+      margin-top: 2px;
+    }
+  }
+
+  .btn-end {
+    .button {
+      color: map-get($map: $appColors, $key: gray);
+    }
+  }
+
+  .table-container {
+    text-align: center;
+    border-right: 1px solid #F8F8F8;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .price-container {
+    text-align: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .font-small {
+    margin-top: 10px;
+    color: map-get($map: $appColors, $key: gray);
+  }
+
+  .button-bottom {
+    .button {
+      padding: 0 10px;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+  }
+
+  .button-bottom-icon {
+    .button {
+      padding: 0;
+      font-size: 1.3rem;
+      color: map-get($map: $appColors, $key: gray);
+    }
+  }
+}

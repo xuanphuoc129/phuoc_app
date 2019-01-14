@@ -1,0 +1,76 @@
+<!--
+  Generated template for the SelectTableToOrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar>
+    <ion-row align-items-center>
+      <ion-col>
+        <button ion-button clear class="button-header" navPop>
+          <ion-icon name="md-arrow-back"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <div class="a3-container a3-items-center a3-justify-end res-name-header-container">
+          <ion-icon name="ios-restaurant-outline"></ion-icon>
+          <div class="res-name-header">{{mAppModule.getRestaurantOfUser().name}}</div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content >
+  <div class="a3-container a3-items-center a3-justify-between row-text-title">
+    <div class="font-big bold">Chọn bàn</div>
+    <div class="order-id">{{order_id || 'Thêm mới order'}}</div>
+  </div>
+
+  <div class="a3-container a3-items-center">
+    <div class="hint-item a3-container a3-items-center">
+      <div class="square light"></div>
+      <div class="text-hint">Bàn trống</div>
+    </div>
+
+    <div class="hint-item a3-container a3-items-center">
+      <div class="square red"></div>
+      <div class="text-hint">Đang phục vụ</div>
+    </div>
+
+  </div>
+
+  <div class="text-italic-gray">
+    Chạm vào tên bàn để chọn bàn
+  </div>
+
+  <div class="table-models-container" *ngFor="let item of mTables">
+    <div class="floor-name">{{item.floor.name}}</div>
+    <ion-row>
+      <ion-col col-3 *ngFor="let table of item.tables">
+        <div class="table-item" [class.selected]="table.table_id == mTableSelected.table_id" (click)="onClickTable(table)" text-center tappable>{{table.name}}</div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row align-items-center>
+      <ion-col>
+        <div class="text-selected">Đã chọn: {{mTableSelected.name}}</div>
+      </ion-col>
+      <ion-col>
+        <div class="btn-save-container">
+          <button ion-button outline [disabled]="mTableSelected.table_id == -1" (click)="onClickContinue()">{{btn_text}}</button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

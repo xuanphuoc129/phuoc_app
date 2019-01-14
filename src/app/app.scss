@@ -1,0 +1,117 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+.tabs-ios .tabbar{
+    border-top: 0;
+    box-shadow: 0 -1px 5px rgba($color: #676767, $alpha: .16);
+}
+.footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before{
+    height: 1px;
+}
+.header-md::after{
+    height: 0;
+}
+ion-header{
+    box-shadow: 0 1px 2px rgba($color: #BAC1D5, $alpha: .16);
+}
+ion-content.content{
+    background:#F8F8F8;
+    
+}
+.scroll-content{
+    padding: 10px;
+}
+.header-ios .toolbar-ios:last-child .toolbar-background-ios{
+    border-width: 0;
+}
+.res-name-header-container{
+    padding-left: 6px;
+}
+.res-name-header{
+    color: #676767;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-left: 6px;
+}
+.font-big{
+    font-size: 1.7rem;
+}
+.font-small{
+    font-size: 1.1rem;
+}
+.bold{
+    font-weight: bold;
+}
+.row-text-title{
+    margin-top: 6px;
+    .order-id{
+        font-weight: 500;
+        color: map-get($map: $appColors, $key: gray);
+        font-size: 1.3rem;
+    }
+}
+
+.green-color{
+    color: #086023;
+}
+.searchbar-ios{
+    padding: 0;
+    min-height: unset;
+    border-top: none;
+    border-bottom: none;
+    background: transparent;
+}
+.searchbar-ios .searchbar-input{
+    border: 1px solid map-get($map: $appColors, $key: second);
+    height: 4.8rem;
+}
+.searchbar-ios .searchbar-search-icon{
+    left: 10px;
+    top: 17px;
+}
+.searchbar-md{
+    padding: 0;
+}
+.searchbar-md .searchbar-input{
+    padding: 6px 36px;
+    box-shadow: none;
+    border: 1px solid map-get($map: $appColors, $key: second);
+    border-radius: 5px;
+}
+.searchbar-md .searchbar-search-icon{
+    left: 10px;
+}
+.margin-left-6{
+    margin-left: 6px;
+}
+.button-header{
+    
+    padding: 10px 20px 10px 0;
+    text-align: left;
+    margin: 0;
+    height: unset;
+    color: map-get($map: $appColors, $key: dark);
+}
+
+.background-image{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.button{
+    border-radius: 5px;
+}

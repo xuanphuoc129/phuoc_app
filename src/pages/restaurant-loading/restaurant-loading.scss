@@ -1,0 +1,48 @@
+page-restaurant-loading {
+  .a1-container {
+    text-align: center;
+    color: map-get($map: $appColors, $key: dark);
+    padding-top: 30px;
+    .logo-image{
+        height: 100px;
+        width: 100px;
+       
+    }
+    .restaurant-name{
+        margin-bottom: 30px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.7rem;
+        font-weight: bold;
+    }
+
+    .text-show {
+      padding-top: 20px;
+      font-size: 1.3rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .text-bold {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-top: 6px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .progres-background {
+      height: 10px;
+      width: 200px;
+      border-radius: 20px;
+      background: map-get($map: $appColors, $key: second);
+
+      .progres-animate {
+        background: map-get($map: $appColors, $key: primary);
+        height: 10px;
+        width: 200px;
+        border-radius: 20px;
+        transition: 1s;
+        transform-origin: left;
+        transform: scaleX(0);
+      }
+    }
+  }
+}

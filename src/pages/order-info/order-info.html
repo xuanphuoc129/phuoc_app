@@ -1,0 +1,132 @@
+<!--
+  Generated template for the OrderInfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar>
+    <ion-row align-items-center>
+      <ion-col>
+        <button ion-button clear class="button-header" navPop>
+          <ion-icon name="md-arrow-back"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <div class="a3-container a3-items-center a3-justify-end res-name-header-container">
+          <ion-icon name="ios-restaurant-outline"></ion-icon>
+          <div class="res-name-header">{{mAppModule.getRestaurantOfUser().name}}</div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+
+
+</ion-header>
+
+
+
+<ion-content>
+
+  <div class="searchOrder a3-container-center">
+    <div class="icon-search">
+      <ion-icon name="search"></ion-icon>
+    </div>
+
+    <div class="order-id">
+      Order #{{mOrder.order_id}}
+    </div>
+
+    <div class="time-serve">
+      <ion-icon name="clock"></ion-icon>
+      {{mOrder.time_created | timeServe}}
+    </div>
+  </div>
+
+  <ion-row align-items-center margin-top>
+    <ion-col col-6>
+      <div class="item-block-container" (click)="onClickTable()" tappable>
+        <div class="icon-container">
+          <ion-icon name="pin"></ion-icon>
+        </div>
+        <div class="table-name">
+          {{mOrder.mTable.name}} - {{mOrder.mTable.floor_id | floorName}}
+        </div>
+      </div>
+    </ion-col>
+    <ion-col col-6>
+      <div class="item-block-container" (click)="onClickNumberCustomer()" tappable>
+        <div class="icon-container">
+          <ion-icon name="man"></ion-icon>
+        </div>
+        <div class="table-name">
+          {{mOrder.number_customer}} người
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <div class="font-p-list">Danh sách món</div>
+
+  <div class="a3-container a3-items-center" (click)="onClickAddFood()">
+    <div class="add-btn-container">
+      <button ion-button icon-only round>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </div>
+
+    <div class="text-btn">
+      Thêm món
+    </div>
+  </div>
+
+  <div class="list-item">
+    <div class="product-container" *ngFor="let item of products; let i = index">
+      <div class="a3-container a3-items-center">
+        <div class="stt">{{i+1}}.</div>
+        <div class="pro-thumnail a3-container-center" [hidden]="item.thumnail">
+          <ion-icon name="ios-image-outline"></ion-icon>
+        </div>
+
+        <div class="pro-thumnail a3-container-center background-image" [ngStyle]="{'background-image': 'url('+item.thumnail+')'}"
+          [hidden]="!item.thumnail"></div>
+
+        <div class="text-container">
+          <div class="product-name">{{item.name}}</div>
+          <div class="product-price">SL : {{item.amount}}/{{item.quantity}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row align-items-center>
+      <ion-col>
+        <div class="btn-delete">
+          <button ion-button icon-only class="dark" clear (click)="onClickDelete()">
+            <ion-icon name="ios-trash-outline"></ion-icon>
+          </button>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="btn-save-container">
+          <button ion-button outline icon-left (click)="onClickCheck()">
+            <ion-icon name="ios-restaurant-outline"></ion-icon>
+            Kiểm đồ
+          </button>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="btn-save-container">
+          <button ion-button outline icon-left (click)="onClickMoney()">
+            <ion-icon name="ios-cash-outline"></ion-icon>
+            Thanh toán</button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

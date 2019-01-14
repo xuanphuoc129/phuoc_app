@@ -1,0 +1,33 @@
+<!-- Generated template for the ProductCardComponent component -->
+<div>
+  <div class="product-container a1-relative">
+
+    <div class="a3-container a3-items-center">
+      <div class="pro-thumnail a3-container-center" [hidden]="mProduct.thumnail">
+        <ion-icon name="ios-image-outline"></ion-icon>
+      </div>
+
+      <div class="pro-thumnail a3-container-center background-image" [ngStyle]="{'background-image': 'url('+mProduct.thumnail+')'}"
+        [hidden]="!mProduct.thumnail"></div>
+
+      <div class="text-container">
+        <div class="product-name">{{mProduct.name}}</div>
+        <div class="product-price">{{mProduct.price | number}} * 1 {{mProduct.unit}}</div>
+      </div>
+    </div>
+
+    <div class="a3-container a3-items-center bottom">
+      <button ion-button class="button-remove" (click)="onClickRemove()" [hidden]="mNumber == 0">
+        <ion-icon name="remove"></ion-icon>
+      </button>
+
+      <button ion-button outline class="button-text" (click)="onClickNumber()" [hidden]="mNumber == 0">
+        {{mNumber}}
+      </button>
+
+      <button ion-button class="button-add" (click)="onClickAdd()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </div>
+  </div>
+</div>

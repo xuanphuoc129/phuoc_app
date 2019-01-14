@@ -1,0 +1,59 @@
+page-select-table-to-order {
+    .btn-save-container{
+        text-align: right;
+        .button{
+            background: white;
+            min-width: 100px;
+          }
+    }
+    .hint-item{
+        margin-left: 10px;
+        padding: 10px 0;
+        .square{
+            height: 16px;
+            width: 16px;
+            border-radius: 2px;
+            &.light{
+                background: map-get($map: $appColors, $key: light);
+            }
+            &.red{
+                background: map-get($map: $appColors, $key: red);
+            }
+        }
+        .text-hint{
+            margin-left: 8px;
+        }
+    }
+    .text-italic-gray{
+        font-style: italic;
+        color: map-get($map: $appColors, $key: gray);
+        font-size: 1.1rem;
+    }
+
+    .table-models-container{
+        padding-top: 16px;
+        .floor-name{
+            font-weight: bold;
+            color: map-get($map: $appColors, $key: dark);
+            font-size: 1.5rem;
+            padding: 10px 0;
+        }
+        .table-item{
+            background: map-get($map: $appColors, $key: light);
+            border-radius: 5px;
+            padding: 14px 0;
+            transition: 300ms;
+            &.selected{
+                background: map-get($map: $appColors, $key: primary);
+                color: white;
+                box-shadow: 0 6px 12px rgba($color: map-get($map: $appColors, $key: primary), $alpha: .2);
+                font-weight: bold;
+            }
+        }
+    }
+
+
+    ion-content.content{
+        background: white;
+    }
+}

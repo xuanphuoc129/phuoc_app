@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "name": "Quản lí nhà hàng",
+  "onesignal": {
+    "enable": false,
+    "app_id": "bfec5fc3-b0c0-4d32-a80d-f32c2331690d",
+    "project_number": "893836876426",
+    "default_onesignal_id": "22d2f455-7a9c-4fb1-9b0f-s382sja22"
+  },
+  "device": {
+    "uuid_default": "",
+    "name_default": "Web"
+  },
+  "smartfox": {
+    "smartfox_server": "smartfox_test",
+    "smartfox_primary": {
+      "host": "server.bongda69.online",
+      "port": 9000,
+      "zone": "Cafe69Zone",
+      "debug": true
+    },
+    "smartfox_test": {
+      "host": "127.0.0.1",
+      "port": 8080,
+      "zone": "p2pZone",
+      "debug": true
+    }
+  },
+  "account": {
+    "username": "admin",
+    "password": "admin"
+  }
+}

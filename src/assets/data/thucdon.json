@@ -1,0 +1,238 @@
+{
+    "data": [
+        {
+            "name": "Cơm gà",
+            "price": "45000",
+            "currency": "VNĐ",
+            "unit": "suất",
+            "area_id": "1",
+            "category_id": "8",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Cơm gà sốt tiêu đen",
+            "price": "50000",
+            "currency": "VNĐ",
+            "unit": "suất",
+            "area_id": "1",
+            "category_id": "8",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Cơm sườn",
+            "price": "40000",
+            "currency": "VNĐ",
+            "unit": "suất",
+            "area_id": "1",
+            "category_id": "8",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Heniken",
+            "price": "16000",
+            "currency": "VNĐ",
+            "unit": "chai",
+            "area_id": "2",
+            "category_id": "9",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Tiger",
+            "price": "10000",
+            "currency": "VNĐ",
+            "unit": "chai",
+            "area_id": "2",
+            "category_id": "9",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Hà nội",
+            "price": "10000",
+            "currency": "VNĐ",
+            "unit": "lon",
+            "area_id": "2",
+            "category_id": "9",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Turbox",
+            "price": "14000",
+            "currency": "VNĐ",
+            "unit": "lon",
+            "area_id": "2",
+            "category_id": "9",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Sài gòn",
+            "price": "16000",
+            "currency": "VNĐ",
+            "unit": "chai",
+            "area_id": "2",
+            "category_id": "9",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Cà phê cốt dừa",
+            "price": "28000",
+            "currency": "VNĐ",
+            "unit": "cốc",
+            "area_id": "3",
+            "category_id": "3",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Cà phê đen",
+            "price": "20000",
+            "currency": "VNĐ",
+            "unit": "cốc",
+            "area_id": "3",
+            "category_id": "3",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Cà phê nâu",
+            "price": "20000",
+            "currency": "VNĐ",
+            "unit": "cốc",
+            "area_id": "3",
+            "category_id": "3",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Cà phê cốm",
+            "price": "28000",
+            "currency": "VNĐ",
+            "unit": "cốc",
+            "area_id": "3",
+            "category_id": "3",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Cà phê trứng",
+            "price": "28000",
+            "currency": "VNĐ",
+            "unit": "cốc",
+            "area_id": "3",
+            "category_id": "3",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Cà phê capuchino",
+            "price": "28000",
+            "currency": "VNĐ",
+            "unit": "cốc",
+            "area_id": "3",
+            "category_id": "3",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Sinh tố xoài",
+            "price": "20000",
+            "currency": "VNĐ",
+            "unit": "cốc",
+            "area_id": "3",
+            "category_id": "4",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Sinh tố bơ",
+            "price": "20000",
+            "currency": "VNĐ",
+            "unit": "cốc",
+            "area_id": "3",
+            "category_id": "4",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Sinh tố dưa hấu",
+            "price": "20000",
+            "currency": "VNĐ",
+            "unit": "cốc",
+            "area_id": "3",
+            "category_id": "4",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Sinh tố dâu",
+            "price": "20000",
+            "currency": "VNĐ",
+            "unit": "cốc",
+            "area_id": "3",
+            "category_id": "4",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Lẩu thái",
+            "price": "350000",
+            "currency": "VNĐ",
+            "unit": "nồi",
+            "area_id": "4",
+            "category_id": "5",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Lẩu nấm đông cô",
+            "price": "300000",
+            "currency": "VNĐ",
+            "unit": "nồi",
+            "area_id": "4",
+            "category_id": "5",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Lẩu cá kèo",
+            "price": "500000",
+            "currency": "VNĐ",
+            "unit": "nồi",
+            "area_id": "4",
+            "category_id": "5",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Gà không lối thoát",
+            "price": "300000",
+            "currency": "VNĐ",
+            "unit": "con",
+            "area_id": "4",
+            "category_id": "6",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Gà hấp lá chanh",
+            "price": "250000",
+            "currency": "VNĐ",
+            "unit": "con",
+            "area_id": "4",
+            "category_id": "6",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Gà đắp đất",
+            "price": "350000",
+            "currency": "VNĐ",
+            "unit": "con",
+            "area_id": "4",
+            "category_id": "6",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Gà nấu măng",
+            "price": "280000",
+            "currency": "VNĐ",
+            "unit": "con",
+            "area_id": "4",
+            "category_id": "6",
+            "restaurant_id": "1"
+        },
+        {
+            "name": "Gà xé phay",
+            "price": "300000",
+            "currency": "VNĐ",
+            "unit": "con",
+            "area_id": "4",
+            "category_id": "6",
+            "restaurant_id": "1"
+        }
+    ]
+}
