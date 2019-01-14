@@ -29,7 +29,7 @@
 
 <ion-content>
 
-  <div class="searchOrder a3-container-center">
+  <div class="searchOrder a3-container-center" tappable (click)="onClickAllOrders()">
     <div class="icon-search">
       <ion-icon name="search"></ion-icon>
     </div>
@@ -38,63 +38,74 @@
       Order #{{mOrder.order_id}}
     </div>
 
-    <div class="time-serve">
+    <div class="time-serve" [hidden]="mOrder.status != 1">
       <ion-icon name="clock"></ion-icon>
       {{mOrder.time_created | timeServe}}
     </div>
-  </div>
 
-  <ion-row align-items-center margin-top>
-    <ion-col col-6>
-      <div class="item-block-container" (click)="onClickTable()" tappable>
-        <div class="icon-container">
-          <ion-icon name="pin"></ion-icon>
-        </div>
-        <div class="table-name">
-          {{mOrder.mTable.name}} - {{mOrder.mTable.floor_id | floorName}}
-        </div>
-      </div>
-    </ion-col>
-    <ion-col col-6>
-      <div class="item-block-container" (click)="onClickNumberCustomer()" tappable>
-        <div class="icon-container">
-          <ion-icon name="man"></ion-icon>
-        </div>
-        <div class="table-name">
-          {{mOrder.number_customer}} người
-        </div>
-      </div>
-    </ion-col>
-  </ion-row>
-
-  <div class="font-p-list">Danh sách món</div>
-
-  <div class="a3-container a3-items-center" (click)="onClickAddFood()">
-    <div class="add-btn-container">
-      <button ion-button icon-only round>
-        <ion-icon name="add"></ion-icon>
-      </button>
+    <div class="time-serve text-status" [hidden]="mOrder.status != 2">
+      Đã thanh toán
     </div>
 
-    <div class="text-btn">
-      Thêm món
+    <div class="time-serve text-status red" [hidden]="mOrder.status != 3">
+      Đã huỷ
     </div>
+
   </div>
 
-  <div class="list-item">
-    <div class="product-container" *ngFor="let item of products; let i = index">
-      <div class="a3-container a3-items-center">
-        <div class="stt">{{i+1}}.</div>
-        <div class="pro-thumnail a3-container-center" [hidden]="item.thumnail">
-          <ion-icon name="ios-image-outline"></ion-icon>
+  <div [class.order-disable]="mOrder.status != 1">
+    <ion-row align-items-center margin-top>
+      <ion-col col-6>
+        <div class="item-block-container" (click)="onClickTable()" tappable>
+          <div class="icon-container">
+            <ion-icon name="pin"></ion-icon>
+          </div>
+          <div class="table-name">
+            {{mOrder.mTable.name}} - {{mOrder.mTable.floor_id | floorName}}
+          </div>
         </div>
+      </ion-col>
+      <ion-col col-6>
+        <div class="item-block-container" (click)="onClickNumberCustomer()" tappable>
+          <div class="icon-container">
+            <ion-icon name="man"></ion-icon>
+          </div>
+          <div class="table-name">
+            {{mOrder.number_customer}} người
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
 
-        <div class="pro-thumnail a3-container-center background-image" [ngStyle]="{'background-image': 'url('+item.thumnail+')'}"
-          [hidden]="!item.thumnail"></div>
+    <div class="font-p-list">Danh sách món</div>
 
-        <div class="text-container">
-          <div class="product-name">{{item.name}}</div>
-          <div class="product-price">SL : {{item.amount}}/{{item.quantity}}</div>
+    <div class="a3-container a3-items-center" (click)="onClickAddFood()">
+      <div class="add-btn-container">
+        <button ion-button icon-only round>
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </div>
+
+      <div class="text-btn">
+        Thêm món
+      </div>
+    </div>
+
+    <div class="list-item">
+      <div class="product-container" *ngFor="let item of products; let i = index">
+        <div class="a3-container a3-items-center">
+          <div class="stt">{{i+1}}.</div>
+          <div class="pro-thumnail a3-container-center" [hidden]="item.thumnail">
+            <ion-icon name="ios-image-outline"></ion-icon>
+          </div>
+
+          <div class="pro-thumnail a3-container-center background-image" [ngStyle]="{'background-image': 'url('+item.thumnail+')'}"
+            [hidden]="!item.thumnail"></div>
+
+          <div class="text-container">
+            <div class="product-name">{{item.name}}</div>
+            <div class="product-price">SL : {{item.amount}}/{{item.quantity}}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -104,7 +115,7 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-row align-items-center>
+    <ion-row align-items-center [class.order-disable]="mOrder.status != 1">
       <ion-col>
         <div class="btn-delete">
           <button ion-button icon-only class="dark" clear (click)="onClickDelete()">
@@ -124,7 +135,8 @@
         <div class="btn-save-container">
           <button ion-button outline icon-left (click)="onClickMoney()">
             <ion-icon name="ios-cash-outline"></ion-icon>
-            Thanh toán</button>
+            Thanh toán
+          </button>
         </div>
       </ion-col>
     </ion-row>

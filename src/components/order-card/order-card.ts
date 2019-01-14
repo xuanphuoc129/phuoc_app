@@ -40,7 +40,7 @@ export class OrderCardComponent {
   }
 
   onClickClipboard(){
-
+    this.mAppModule.showModal("CheckOrderPage",{id: this.mOrder.getOrder_id()});
   }
 
   onClickMore(){

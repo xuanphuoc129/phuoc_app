@@ -49,6 +49,28 @@ export class AppControllerProvider {
     this.mStorageController.setStorage(this.mStorage);
   }
 
+  public showRadio(title: string, arrayInput: Array<{ id: any, name: string }>, idselected: any, callback: any) {
+    let alert = this.mAlertController.create();
+    alert.setTitle(title);
+    arrayInput.forEach(element => {
+      alert.addInput({
+        type: 'radio',
+        label: element.name,
+        value: element.id + "",
+        checked: element.id == idselected ? true : false
+      })
+    });
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'OK',
+      handler: data => {
+        callback(data);
+      }
+    });
+    alert.present();
+  }
+
+
   async showLoading(content?: string, cssClass?: string, duration?: number) {
     if (this.mLoading) {
       try {

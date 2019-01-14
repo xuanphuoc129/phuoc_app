@@ -1,0 +1,59 @@
+<!--
+  Generated template for the CheckOrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar>
+    <ion-row align-items-center>
+      <ion-col>
+        <button ion-button clear class="button-header" navPop>
+          <ion-icon name="md-arrow-back"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <div class="a3-container a3-items-center a3-justify-end res-name-header-container">
+          <ion-icon name="ios-restaurant-outline"></ion-icon>
+          <div class="res-name-header">{{mAppModule.getRestaurantOfUser().name}}</div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+
+
+</ion-header>
+
+
+<ion-content>
+  <div class="a3-container a3-items-center a3-justify-between row-text-title">
+    <div class="font-big bold">Kiểm đồ</div>
+    <div class="order-id"> Order #{{order_id}}</div>
+  </div>
+
+  <table width="100%">
+    <tr>
+      <th>#</th>
+      <th text-left>Tên món</th>
+      <th>Gọi</th>
+      <th>Trả</th>
+    </tr>
+    <tr *ngFor="let item of products; let i = index" [class.white-bg]="i%2 == 0">
+      <td text-center>{{i+1}}</td>
+      <td>{{item.name}}</td>
+      <td text-center>{{item.quantity}}</td>
+      <td text-center>{{item.amount}}</td>
+    </tr>
+  </table>
+
+  <div margin-top class="a3-container a3-items-center a3-justify-end">
+    <div class="gray-color">Hoá đơn tạm tính: </div>
+    <div class="order-total-money">{{total_money | number}}đ </div>
+  </div>
+
+
+  <div class="login-button-container">
+    <button (click)="login()" ion-button class="btn-login">THANH TOÁN</button>
+  </div>
+</ion-content>

@@ -1,0 +1,52 @@
+page-check-order {
+  .btn-login {
+    transition: 200ms;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: map-get($map: $appColors, $key: primary);
+    box-shadow: 0 6px 12px rgba($color: #086023, $alpha: .42);
+    min-height: 50px;
+    border-radius: 5px;
+  }
+
+  .btn-login:active {
+    box-shadow: 0 2px 4px rgba($color: #086023, $alpha: .16);
+  }
+
+  .login-button-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  ion-content.content {
+    background: #F8F8F8;
+  }
+
+  table {
+    margin-top: 20px;
+  }
+
+  th {
+    background: #086023;
+    color: white;
+    font-weight: 500;
+    padding: 8px;
+  }
+
+  td {
+    padding: 8px;
+    background: #E2EBE5;
+  }
+  .white-bg{
+      td{
+        background: white;
+      }
+  }
+  .order-total-money{
+      color: map-get($map: $appColors, $key: orange);
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-left: 10px;
+  }
+}

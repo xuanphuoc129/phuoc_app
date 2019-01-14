@@ -182,16 +182,16 @@ export class Utils {
     let second = Math.floor(distance / 1000);
 
     if (hour == 0 && minutes == 0 && second == 0) {
-      return "Vừa xong";
+      return "0'";
     }
     if (hour == 0 && minutes == 0 && second > 0) {
-      return second + " giây trước";
+      return second + "'";
     }
     if (hour == 0 && minutes > 0) {
-      return minutes + " phút trước";
+      return minutes + "'";
     }
     if (hour > 0) {
-      return hour + " giờ trước";
+      return hour + "h";
     }
   }
 

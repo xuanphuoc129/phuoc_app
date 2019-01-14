@@ -110,6 +110,7 @@ export class OrderInfoPage {
   }
 
   onClickDelete() {
+    if(this.mOrder.getStatus() != 1)return;
 
     let index = this.products.findIndex(p => {
       return p.getAmount() > 0;
@@ -140,14 +141,18 @@ export class OrderInfoPage {
   }
 
   onClickCheck() {
-
+    if(this.mOrder.getStatus() != 1)return;
+    this.mAppModule.showModal("CheckOrderPage",{id: this.mOrder.getOrder_id()});
   }
 
   onClickMoney() {
+    if(this.mOrder.getStatus() != 1)return;
 
   }
 
   onClickNumberCustomer(){
+    if(this.mOrder.getStatus() != 1)return;
+
     let alert = this.mAppModule.getAlertController().create();
     alert.setTitle("Chỉnh sửa số lượng khách");
     alert.addInput({
@@ -170,6 +175,8 @@ export class OrderInfoPage {
   }
 
   onClickTable(){
+    if(this.mOrder.getStatus() != 1)return;
+
     this.mAppModule.showModal("SelectTableToOrderPage",{id: this.mOrder.getOrder_id(), table_id: this.mOrder.getTable_id()},(table: Tables)=>{
       if(table){
         this.mOrder.setTable_id(table.getTable_id());
@@ -179,6 +186,8 @@ export class OrderInfoPage {
   }
 
   onClickAddFood(){
+    if(this.mOrder.getStatus() != 1)return;
+
     this.mAppModule.showModal("SelectFoodToOrderPage",{id: this.mOrder.getOrder_id(), type: 1},(data)=>{
       if(data){
         RestaurantSFSConnector.getInstance().getListProductInOrder(this.mOrder.getOrder_id());
@@ -186,5 +195,25 @@ export class OrderInfoPage {
     });
   }
 
+  onClickAllOrders(){
+    
+    let orders = OrderManager.getInstance().getAllOrders();
+    let array = [];
+    orders.forEach(element => {
+        array.push({
+          name: "Order #" + element.getOrder_id(),
+          id: element.getOrder_id()
+        });
+    });
+
+    this.mAppModule.showRadio("Chọn order", array,this.mOrder.getOrder_id(),(id)=>{
+      if(id){
+        this.mAppModule.showLoading();
+        this.mOrder.setOrder_id(parseInt(id));
+        RestaurantSFSConnector.getInstance().getListProductInOrder(this.mOrder.getOrder_id());
+        RestaurantSFSConnector.getInstance().getOrderInfo(this.mOrder.getOrder_id());
+      }
+    })
+  }
 
 }

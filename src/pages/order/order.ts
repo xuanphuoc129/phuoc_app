@@ -6,6 +6,7 @@ import { RestaurantSFSConnector } from '../../providers/smartfox/SFSConnector';
 import { RestaurantClient } from '../../providers/smartfox/RestaurantClient';
 import { RestaurantCMD } from '../../providers/smartfox/RestaurantCMD';
 import { RestaurantManager } from '../../providers/app-controller/RestaurantManager';
+import { OrderManager } from '../../providers/app-controller/OrderManager';
 
 /**
  * Generated class for the OrderPage page.
@@ -23,6 +24,9 @@ export class OrderPage {
 
 
   mOrders: Array<Orders> = [];
+  mAllOrders: Array<Orders> = [];
+
+
   mNumberDidEnter: number = 0;
 
   filter_text: string = "Đang phục vụ";
@@ -74,14 +78,19 @@ export class OrderPage {
     }
   }
 
+  onLoadOrdersByFilter(){
+    this.mOrders = this.mAllOrders.filter(o=>{
+      return o.getStatus() == this.mFilterId;
+    })
+  }
+
   onResponseGetListOrder(params) {
     let array = params.array;
-    let orders : Array<Orders> = RestaurantClient.getInstance().onParseListOrder(array);
-    this.mOrders = orders.filter(o=>{
-      return o.getStatus() < 3;
-    })
+    OrderManager.getInstance().onResponseAllOrders(RestaurantClient.getInstance().onParseListOrder(array));
+    this.mAllOrders = OrderManager.getInstance().getAllOrders();
+
     let tables = RestaurantManager.getInstance().getTables();
-    this.mOrders.forEach(element => {
+    this.mAllOrders.forEach(element => {
       let index = tables.findIndex(table => {
         return table.getTable_id() == element.getTable_id();
       })
@@ -90,6 +99,8 @@ export class OrderPage {
         element.getTables().fromObject(tables[index]);
       }
     });
+
+    this.onLoadOrdersByFilter();
   }
 
   onClickAdd() {
@@ -97,7 +108,47 @@ export class OrderPage {
   }
 
   onClickOrderList(){
-    
+    let alert = this.mAppModule.getAlertController().create();
+    alert.setTitle("Trạng thái order");
+
+    alert.addInput({
+      type: "radio",
+      label: "Đang phục vụ",
+      value: "1",
+      checked: this.mFilterId == 1 ? true : false,
+      handler: ()=>{
+        this.mFilterId = 1;
+        this.filter_text = "Đang phục vụ";
+        this.onLoadOrdersByFilter();
+        alert.dismiss();
+      }
+    })
+    alert.addInput({
+      type: "radio",
+      label: "Đã thanh toán",
+      value: "2",
+      checked: this.mFilterId == 2 ? true : false,
+      handler: ()=>{
+        this.mFilterId = 2;
+        this.filter_text = "Đã thanh toán";
+        this.onLoadOrdersByFilter();
+        alert.dismiss();
+      }
+    })
+    alert.addInput({
+      type: "radio",
+      label: "Đã huỷ",
+      value: "3",
+      checked: this.mFilterId == 3 ? true : false,
+      handler: ()=>{
+        this.mFilterId = 3;
+        this.filter_text = "Đã huỷ";
+        this.onLoadOrdersByFilter();
+        alert.dismiss();
+      }
+    })
+
+    alert.present();
   }
 
 }

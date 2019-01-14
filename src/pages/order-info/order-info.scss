@@ -67,6 +67,9 @@ page-order-info {
       right: 10px;
       top: 50%;
       transform: translateY(-50%);
+      &.red{
+        color: map-get($map: $appColors, $key: gray);
+      }
     }
   }
 
@@ -118,6 +121,10 @@ page-order-info {
     .button{
       background: white;
     }
+  }
+
+  .order-disable{
+    filter: grayscale(100%);
   }
 
 }

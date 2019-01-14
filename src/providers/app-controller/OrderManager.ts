@@ -10,8 +10,18 @@ export class OrderManager{
     private mOrderNew: OrderModels = {order: new Orders(), products: []};
     private mOrderEdit: OrderEditModels = {};
 
+    private mAllOrders: Array<Orders> = [];
+
     constructor(){
 
+    }
+
+    public getAllOrders(){
+        return this.mAllOrders;
+    }
+
+    public onResponseAllOrders(orders){
+        this.mAllOrders = orders;
     }
 
     public getOrderEdit(){
