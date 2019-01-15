@@ -10,8 +10,16 @@ export class ProductInOrder{
     private  total_money : number = 0;
 	private  name : string = "";
 
+	private  cooking_number : number = 0;
+	private  cook_done : number = 0;
+	private table_id: number = -1;
+
     constructor(){
 
+	}
+
+	public getNeedCookNumber(){
+		return this.quantity - this.amount - this.cook_done - this.cooking_number;
 	}
 	
 	public fromProductInModels(product: ProductModels){
@@ -28,6 +36,9 @@ export class ProductInOrder{
 		o.putInt(Paramskey.AMOUNT, this.getAmount());
 		o.putInt(Paramskey.STATUS, this.getStatus());
 		o.putDouble(Paramskey.TOTAL_MONEY, this.getTotal_money());
+		o.putInt(Paramskey.COOKING_NUMBER, this.getCooking_number());
+		o.putInt(Paramskey.COOK_DONE, this.getCook_done());
+		o.putInt(Paramskey.TABLE_ID, this.getTable_id());
 		return o;
 	}
 	
@@ -60,7 +71,41 @@ export class ProductInOrder{
 		if(o.containsKey(Paramskey.NAME)) {
 			this.setName(o.getUtfString(Paramskey.NAME));
 		}
-		
+
+		if(o.containsKey(Paramskey.COOKING_NUMBER)) {
+			this.setCooking_number(o.getInt(Paramskey.COOKING_NUMBER));
+		}
+		if(o.containsKey(Paramskey.COOK_DONE)) {
+			this.setCook_done(o.getInt(Paramskey.COOK_DONE));
+		}
+		if (o.containsKey(Paramskey.TABLE_ID)) {
+            this.setTable_id(o.getInt(Paramskey.TABLE_ID));
+        }
+
+	}
+	public getTable_id() {
+        return this.table_id;
+    }
+
+
+    public setTable_id(table_id) {
+        this.table_id = table_id;
+    }
+
+	public  getCooking_number() {
+		return this.cooking_number;
+	}
+
+	public  setCooking_number( cooking_number) {
+		this.cooking_number = cooking_number;
+	}
+
+	public  getCook_done() {
+		return this.cook_done;
+	}
+
+	public  setCook_done( cook_done) {
+		this.cook_done = cook_done;
 	}
 
 	public  getName() {

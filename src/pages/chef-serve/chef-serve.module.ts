@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { ServePage } from './serve';
+import { ChefServePage } from './chef-serve';
 import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [
-    ServePage,
+    ChefServePage,
   ],
   imports: [
-    IonicPageModule.forChild(ServePage),
+    IonicPageModule.forChild(ChefServePage),
     PipesModule
   ],
 })
-export class ServePageModule {}
+export class ChefServePageModule {}

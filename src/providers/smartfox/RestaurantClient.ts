@@ -62,6 +62,15 @@ export class RestaurantClient extends SfsClientBaseExtension{
         else if(cmd == RestaurantCMD.GET_PRODUCT_IN_ORDER){
             return this.doParseArrayExtensions(params);
         }
+        else if(cmd == RestaurantCMD.GET_PRODUCT_IN_ORDER_COOKING_DONE){
+            return this.doParseArrayExtensions(params);
+        }
+        else if(cmd == RestaurantCMD.GET_PRODUCT_IN_ORDER_YET){
+            return this.doParseArrayExtensions(params);
+        }
+        else if(cmd == RestaurantCMD.GET_PRODUCT_IN_ORDER_COOKING){
+            return this.doParseArrayExtensions(params);
+        }
         else if(cmd == RestaurantCMD.UPDATE_PRODUCT_IN_ORDER){
             return this.doParseInfo(params);
         }
@@ -69,6 +78,9 @@ export class RestaurantClient extends SfsClientBaseExtension{
             return this.doParseInfo(params);
         }
         else if(cmd == RestaurantCMD.REMOVE_ORDER){
+            return this.doParseInfo(params);
+        }
+        else if(cmd == RestaurantCMD.GET_STAFF_INFO){
             return this.doParseInfo(params);
         }
     }

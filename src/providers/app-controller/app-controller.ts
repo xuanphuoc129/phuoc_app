@@ -26,7 +26,7 @@ import { RestaurantManager } from './RestaurantManager';
 @Injectable()
 export class AppControllerProvider {
   USERLOGIN: string = "userlogin";
-  isLogin : boolean = false;
+  isLogin: boolean = false;
   private mAppConfig: Config;
   private mStorageController: StorageController;
   private mUserData: UserData = new UserData();
@@ -109,23 +109,23 @@ export class AppControllerProvider {
   }
 
 
-  public getEventController(){
+  public getEventController() {
     return this.mEventController;
   }
 
-  public getAlertController(){
+  public getAlertController() {
     return this.mAlertController;
   }
 
-  public showAlertCantConnectServer(){
+  public showAlertCantConnectServer() {
     let alert = this.mAlertController.create();
     alert.setMessage("Không thể kết nối đến server");
     alert.addButton({
       text: "Thử lại",
-      handler: ()=>{
-        RestaurantSFSConnector.getInstance().connect().then(()=>{
+      handler: () => {
+        RestaurantSFSConnector.getInstance().connect().then(() => {
           this.mApp.getRootNav().setRoot("LoadingPage");
-        }).catch(err=>{
+        }).catch(err => {
           this.showAlertCantConnectServer();
         })
       }
@@ -133,11 +133,11 @@ export class AppControllerProvider {
     alert.present();
   }
 
-  public showModal(page, params?: any,callback?:any) {
-    let modal = this.mModalController.create(page, params ? params : null );
+  public showModal(page, params?: any, callback?: any) {
+    let modal = this.mModalController.create(page, params ? params : null);
     modal.present();
-    modal.onDidDismiss((data)=>{
-      if(callback){
+    modal.onDidDismiss((data) => {
+      if (callback) {
         callback(data);
       }
     })
@@ -253,7 +253,7 @@ export class AppControllerProvider {
       this.onExtensionRespone(response);
     })
     RestaurantSFSConnector.getInstance().getRestaurantOfUser();
-    
+
   }
 
   public onExtensionRespone(response) {
@@ -264,7 +264,10 @@ export class AppControllerProvider {
       let dataBase = RestaurantClient.getInstance().doBaseDataWithCMDParams(cmd, params);
       if (cmd == RestaurantCMD.GET_RESTAURANT_OF_USER) {
         this.onGetRestaurantOfUser(dataBase);
-      }else if (cmd == RestaurantCMD.GET_LIST_CATEGORIES_IN_RESTAURANT) {
+      } else if (cmd == RestaurantCMD.GET_STAFF_INFO) {
+        this.onParseStaffInfo(dataBase);
+      }
+      else if (cmd == RestaurantCMD.GET_LIST_CATEGORIES_IN_RESTAURANT) {
         RestaurantManager.getInstance().setCategors(dataBase);
       } else if (cmd == RestaurantCMD.GET_PRODUCT_IN_RESTAURANT) {
         RestaurantManager.getInstance().setProducts(dataBase);
@@ -280,11 +283,26 @@ export class AppControllerProvider {
     }
   }
 
-  public showParamsMessage(params){
+  onParseStaffInfo(dataBase){
+    this.mUser.fromSFSObject(dataBase.info);
+    if(this.mUser.getRole() == 3){
+      this.mApp.getRootNav().setRoot("TabsPage");
+    }else if(this.mUser.getRole() == 4){
+      this.mApp.getRootNav().setRoot("ChefTabsPage");
+    }else{
+      return;
+    }
+  }
+
+
+  public showParamsMessage(params) {
     this.showToast(params.getUtfString(Paramskey.MESSAGE));
   }
-  public onGetRestaurantOfUser(params){
+
+
+  public onGetRestaurantOfUser(params) {
     this.mRestaurantOfUser = params;
+    RestaurantSFSConnector.getInstance().getStaffInfo(this.getRestaurantOfUser().getRestaurant_id(), this.mUser.getUserID());
     RestaurantSFSConnector.getInstance().getListCategoryOfRestaurant(this.mRestaurantOfUser[0].getRestaurant_id());
     RestaurantSFSConnector.getInstance().getListProductOfRestaurant(this.mRestaurantOfUser[0].getRestaurant_id());
     RestaurantSFSConnector.getInstance().getListTableOfRestaurant(this.mRestaurantOfUser[0].getRestaurant_id());
@@ -292,6 +310,9 @@ export class AppControllerProvider {
     RestaurantSFSConnector.getInstance().getListFloorOfRestaurant(this.mRestaurantOfUser[0].getRestaurant_id());
   }
 
- 
+  public logout() {
+    return this.getStorageController().removeKeyDataFromStorage(this.USERLOGIN);
+  }
+
 
 }

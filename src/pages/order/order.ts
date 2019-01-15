@@ -35,6 +35,7 @@ export class OrderPage {
   constructor(
     public mAppModule: AppControllerProvider,
     public navCtrl: NavController, public navParams: NavParams) {
+    this.mFilterId = 1;
   }
 
   ionViewDidEnter() {
@@ -78,16 +79,16 @@ export class OrderPage {
     }
   }
 
-  onLoadOrdersByFilter(){
-    this.mOrders = this.mAllOrders.filter(o=>{
+  onLoadOrdersByFilter() {
+    this.mOrders = this.mAllOrders.filter(o => {
       return o.getStatus() == this.mFilterId;
     })
   }
 
   onResponseGetListOrder(params) {
     let array = params.array;
-    OrderManager.getInstance().onResponseAllOrders(RestaurantClient.getInstance().onParseListOrder(array));
-    this.mAllOrders = OrderManager.getInstance().getAllOrders();
+    this.mAllOrders = RestaurantClient.getInstance().onParseListOrder(array);
+    OrderManager.getInstance().onResponseAllOrders(this.mAllOrders);
 
     let tables = RestaurantManager.getInstance().getTables();
     this.mAllOrders.forEach(element => {
@@ -107,7 +108,7 @@ export class OrderPage {
     this.navCtrl.push("CreateOrderPage");
   }
 
-  onClickOrderList(){
+  onClickOrderList() {
     let alert = this.mAppModule.getAlertController().create();
     alert.setTitle("Trạng thái order");
 
@@ -116,7 +117,7 @@ export class OrderPage {
       label: "Đang phục vụ",
       value: "1",
       checked: this.mFilterId == 1 ? true : false,
-      handler: ()=>{
+      handler: () => {
         this.mFilterId = 1;
         this.filter_text = "Đang phục vụ";
         this.onLoadOrdersByFilter();
@@ -128,7 +129,7 @@ export class OrderPage {
       label: "Đã thanh toán",
       value: "2",
       checked: this.mFilterId == 2 ? true : false,
-      handler: ()=>{
+      handler: () => {
         this.mFilterId = 2;
         this.filter_text = "Đã thanh toán";
         this.onLoadOrdersByFilter();
@@ -140,7 +141,7 @@ export class OrderPage {
       label: "Đã huỷ",
       value: "3",
       checked: this.mFilterId == 3 ? true : false,
-      handler: ()=>{
+      handler: () => {
         this.mFilterId = 3;
         this.filter_text = "Đã huỷ";
         this.onLoadOrdersByFilter();

@@ -6,13 +6,42 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>serve</ion-title>
-  </ion-navbar>
+  <ion-toolbar>
+
+    <div class="a3-container a3-items-center res-name-header-container">
+      <ion-icon name="ios-restaurant-outline"></ion-icon>
+      <div class="res-name-header">{{mAppModule.getRestaurantOfUser().name}}</div>
+    </div>
+
+  </ion-toolbar>
+
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <div class="font-big bold">Trả món</div>
 
+  <!-- <div class="bg-segment">
+      <ion-row>
+        <ion-col tappable (click)="onClickSegment(item)" col-6 *ngFor="let item of segments" [class.selected]="item.id == segmentID">{{item.name}}</ion-col>
+      </ion-row>
+    </div> -->
+
+  <div class="gray-color" margin padding text-center [hidden]="mProducts.length > 0">Chưa có món ăn nào</div>
+
+  <div class="product-container" *ngFor="let item of mProducts; let i = index" >
+    <div class="a3-container a3-items-center a1-relative">
+      <div class="stt">{{i+1}}.</div>
+      <div class="text-container">
+        <div class="product-name">{{item.name}} * {{item.cook_done}}</div>
+        <div class="sub-title">{{item.table_id | tableName}}</div>
+      </div>
+
+      <div class="circle-red-color">
+        <button ion-button (click)="onClickServe(item)">Trả món</button>
+      </div>
+
+    </div>
+  </div>
 </ion-content>

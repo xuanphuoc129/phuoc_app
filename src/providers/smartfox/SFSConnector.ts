@@ -338,6 +338,41 @@ export class RestaurantSFSConnector extends SFSConnector {
         params.putInt(Paramskey.ORDER_ID,order_id);
         this.send(this.cmd,params);
     }
+    
+    public getListProductInOrderCookingDone(restaurant_id : number){
+        let params = new SFS2X.SFSObject();
+        params.putUtfString(Paramskey.CMD, RestaurantCMD.GET_PRODUCT_IN_ORDER_COOKING_DONE);
+        params.putInt(Paramskey.RESTAURANT_ID,restaurant_id);
+        this.send(this.cmd,params);
+    }
+
+    public getListProductInOrderCooking(restaurant_id : number){
+        let params = new SFS2X.SFSObject();
+        params.putUtfString(Paramskey.CMD, RestaurantCMD.GET_PRODUCT_IN_ORDER_COOKING);
+        params.putInt(Paramskey.RESTAURANT_ID,restaurant_id);
+        this.send(this.cmd,params);
+    }
+
+    public getListProductInOrderNeed(restaurant_id : number){
+        let params = new SFS2X.SFSObject();
+        params.putUtfString(Paramskey.CMD, RestaurantCMD.GET_PRODUCT_IN_ORDER_YET);
+        params.putInt(Paramskey.RESTAURANT_ID,restaurant_id);
+        this.send(this.cmd,params);
+    }
+
+    public getTopProductInRestaurant(restaurant_id : number){
+        let params = new SFS2X.SFSObject();
+        params.putUtfString(Paramskey.CMD, RestaurantCMD.GET_TOP_PRODUCT_IN_RESTAURANT);
+        params.putInt(Paramskey.RESTAURANT_ID,restaurant_id);
+        this.send(this.cmd,params);
+    }
+
+    public getBottomProductInRestaurant(restaurant_id : number){
+        let params = new SFS2X.SFSObject();
+        params.putUtfString(Paramskey.CMD, RestaurantCMD.GET_BOTTOM_PRODUCT_IN_RESTAURANT);
+        params.putInt(Paramskey.RESTAURANT_ID,restaurant_id);
+        this.send(this.cmd,params);
+    }
 
     public getOrderInfo(order_id : number){
         let params = new SFS2X.SFSObject();
@@ -364,6 +399,14 @@ export class RestaurantSFSConnector extends SFSConnector {
         let params = new SFS2X.SFSObject();
         params.putUtfString(Paramskey.CMD, RestaurantCMD.REMOVE_ORDER);
         params.putInt(Paramskey.ORDER_ID,order_id);
+        this.send(this.cmd,params);
+    }
+
+    public getStaffInfo(restaurant_id: number, staff_id: number){
+        let params = new SFS2X.SFSObject();
+        params.putUtfString(Paramskey.CMD, RestaurantCMD.GET_STAFF_INFO);
+        params.putInt(Paramskey.RESTAURANT_ID,restaurant_id);
+        params.putInt(Paramskey.STAFF_ID,staff_id);
         this.send(this.cmd,params);
     }
 }

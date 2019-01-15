@@ -6,28 +6,33 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>user</ion-title>
-  </ion-navbar>
+  <ion-toolbar>
+   <div class="m-header-container">
+      <div class="a3-container-center user-logo">
+          <img src="./assets/imgs/logo.png" alt="">
+        </div>
+    
+        <div class="user-name">{{mUser.name}}</div>
+        <div class="res-name">
+          <ion-icon name="ios-restaurant-outline"></ion-icon>
+          {{restaurant_name}}
+        </div>
+   </div>
+
+  </ion-toolbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <div class="name-header">
-    <div class="name-staff">Nguyễn Văn A</div>
-    <div class="name-app">Ban Mai Xanh</div>
-    <div class="name-position">Ghi Order</div>
-  </div>
-    <div class="name-content">
-      <div class="name-component">Công cụ hữu ích</div>
-    <div class="name-child">
-      <div class="child">Điểm Danh</div>
-      <div class="child" >Lịch Làm Việc</div>
-      <div class="child">Tài liệu đào tạo nghiệp vụ nhà hàng</div>
-      <div class="child">Báo cáo sự cố</div>
-      <div class="child">Cài đặt</div>
-      <div class="child">Đăng xuất</div>
+
+  <div class="font-big bold">Công cụ hữu ích</div>
+
+  <ion-item *ngFor="let item of items; let i = index" (click)="onClickItem(item,i)">
+    <div class="a3-container-center icon-circle" [ngClass]="item.color" item-start>
+        <ion-icon name="{{item.icon}}"></ion-icon>
     </div>
-</div>
+    <ion-label>{{item.name}}</ion-label>
+  </ion-item>
+ 
 </ion-content>

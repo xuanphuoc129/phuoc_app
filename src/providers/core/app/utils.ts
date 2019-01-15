@@ -182,10 +182,10 @@ export class Utils {
     let second = Math.floor(distance / 1000);
 
     if (hour == 0 && minutes == 0 && second == 0) {
-      return "0'";
+      return "s";
     }
     if (hour == 0 && minutes == 0 && second > 0) {
-      return second + "'";
+      return second + "s";
     }
     if (hour == 0 && minutes > 0) {
       return minutes + "'";

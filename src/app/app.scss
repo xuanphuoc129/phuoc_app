@@ -68,6 +68,9 @@ ion-content.content{
 .green-color{
     color: #086023;
 }
+.gray-color{
+    color: map-get($map: $appColors, $key: gray);
+}
 .searchbar-ios{
     padding: 0;
     min-height: unset;

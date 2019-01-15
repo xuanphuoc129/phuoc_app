@@ -1,0 +1,71 @@
+<!--
+  Generated template for the ChefServePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar>
+
+    <div class="a3-container a3-items-center res-name-header-container">
+      <ion-icon name="ios-restaurant-outline"></ion-icon>
+      <div class="res-name-header">{{mAppModule.getRestaurantOfUser().name}}</div>
+    </div>
+
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="font-big bold">Trả món</div>
+
+  <div class="bg-segment">
+    <ion-row>
+      <ion-col tappable (click)="onClickSegment(item)" col-6 *ngFor="let item of segments" [class.selected]="item.id == segmentID">{{item.name}}</ion-col>
+    </ion-row>
+  </div>
+
+  <div [hidden]="segmentID == 2">
+      <div class="gray-color" margin padding text-center [hidden]="mProductsNeedCook.length > 0">Chưa có món ăn nào</div>
+
+      <div class="product-container" *ngFor="let item of mProductsNeedCook; let i = index" >
+        <div class="a3-container a3-items-center a1-relative">
+          <div class="stt">{{i+1}}.</div>
+          <div class="text-container">
+            <div class="product-name">{{item.name}} * {{item.getNeedCookNumber() }}</div>
+            <div class="sub-title">Order #{{item.order_id}}</div>
+          </div>
+    
+          <div class="circle-red-color">
+            <button ion-button (click)="onClickItem(item)">Chế biến</button>
+          </div>
+    
+        </div>
+      </div>
+    
+  </div>
+
+  <div [hidden]="segmentID == 1">
+      <div class="gray-color" margin padding text-center [hidden]="mProductsCooking.length > 0">Chưa có món ăn nào</div>
+
+      <div class="product-container" *ngFor="let item of mProductsCooking; let i = index" >
+        <div class="a3-container a3-items-center a1-relative">
+          <div class="stt">{{i+1}}.</div>
+          <div class="text-container">
+            <div class="product-name">{{item.name}} * {{item.cooking_number }}</div>
+            <div class="sub-title">Order #{{item.order_id}}</div>
+          </div>
+    
+          <div class="circle-red-color">
+            <button ion-button (click)="onClickItemReturn(item)">Trả đồ</button>
+          </div>
+    
+        </div>
+      </div>
+    
+  </div>
+
+  
+</ion-content>
