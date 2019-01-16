@@ -83,10 +83,13 @@ export class ChefServePage {
         this.onResponseGetProductCooking(database);
       } else if (cmd == RestaurantCMD.GET_PRODUCT_IN_ORDER_YET) {
         this.onResponseGetProductNeedCook(database);
-      } else if (cmd == RestaurantCMD.UPDATE_PRODUCT_IN_ORDER) {
+      } else if (cmd == RestaurantCMD.UPDATE_FOOD_COOKING) {
         this.onUpdateProductInOrderSuccess(params);
-      } else if (cmd == RestaurantCMD.ADD_PRODUCT_INTO_ORDER){
-        this.mAppModule.showToast("Có món mới");
+      } else if (cmd == RestaurantCMD.UPDATE_FOOD_COOK_DONE) {
+        this.onUpdateProductInOrderSuccess(params);
+      }
+      else if (cmd == RestaurantCMD.ON_NEW_FOOD_ORDER){
+        this.mAppModule.showToast("New food update");
         this.onLoadData();
       }
     } else {
@@ -133,7 +136,7 @@ export class ChefServePage {
           let cooking = item.getCooking_number();
           item.setCooking_number(cooking + quantity);
           this.mAppModule.showLoading();
-          RestaurantSFSConnector.getInstance().updateProductInOrder(item);
+          RestaurantSFSConnector.getInstance().updateFoodCooking(item);
         }
       }
     });
@@ -160,7 +163,7 @@ export class ChefServePage {
           let done = item.getCook_done();
           item.setCook_done(quantity + done);
           this.mAppModule.showLoading();
-          RestaurantSFSConnector.getInstance().updateProductInOrder(item);
+          RestaurantSFSConnector.getInstance().updateFoodCookDone(item);
         }
       }
     });

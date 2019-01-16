@@ -98,5 +98,12 @@ export class RestaurantCMD {
 	public static GET_PRODUCT_IN_ORDER_YET : string = "get_product_in_order_yet";
 	public static GET_PRODUCT_IN_ORDER_COOKING : string = "get_product_in_order_cooking";
 
+	public static ON_NEW_FOOD_ORDER = "on_new_food_order";
+	public static ON_NEW_ORDER = "on_new_order";
+
+	public static UPDATE_FOOD_COOKING = "update_food_cooking";
+	public static UPDATE_FOOD_COOK_DONE = "update_food_cook_done";
+	public static UPDATE_FOOD_AMOUNT = "update_food_amount";
+
 	constructor() { }
 }

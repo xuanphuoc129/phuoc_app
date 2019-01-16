@@ -80,6 +80,8 @@ export class OrderPage {
       let database = RestaurantClient.getInstance().doBaseDataWithCMDParams(cmd, params);
       if (cmd == RestaurantCMD.GET_LIST_ORDER_TODAY) {
         this.onResponseGetListOrder(database);
+      } else if (cmd == RestaurantCMD.ON_NEW_ORDER) {
+        RestaurantSFSConnector.getInstance().getListOrder(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
       }
     } else {
       this.mAppModule.showParamsMessage(params);
@@ -88,7 +90,7 @@ export class OrderPage {
 
   onLoadOrdersByFilter() {
     console.log("All orders", this.mAllOrders);
-    
+
     this.mOrders = this.mAllOrders.filter(o => {
       return o.getStatus() == this.mFilterId;
     })

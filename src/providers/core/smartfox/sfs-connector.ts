@@ -181,7 +181,7 @@ export class SFSConnector extends Config {
         clearTimeout(this.mPingTimeOutID);
         if (this.mSFSClient != null && this.mSFSClient.isConnected) {
             this.mPingTimeOutID = setTimeout(() => {
-                    this.send("restaurant." +"ping", new SFS2X.SFSObject());
+                    this.send("restaurant", new SFS2X.SFSObject());
             }, 5000);
         }
     }

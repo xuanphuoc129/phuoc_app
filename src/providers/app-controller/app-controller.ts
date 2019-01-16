@@ -281,9 +281,9 @@ export class AppControllerProvider {
         RestaurantManager.getInstance().setAreas(dataBase);
       } else if (cmd == RestaurantCMD.GET_LIST_TABLE_IN_RESTAURANT) {
         RestaurantManager.getInstance().setTables(dataBase);
-      }
+      } 
     } else {
-      this.showToast(params.getUtfString(Paramskey.MESSAGE));
+      // this.showToast(params.getUtfString(Paramskey.MESSAGE));
     }
   }
 

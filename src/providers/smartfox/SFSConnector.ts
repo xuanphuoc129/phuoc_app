@@ -409,4 +409,23 @@ export class RestaurantSFSConnector extends SFSConnector {
         params.putInt(Paramskey.STAFF_ID,staff_id);
         this.send(this.cmd,params);
     }
+
+    public updateFoodCooking(product : ProductInOrder){
+        let params = new SFS2X.SFSObject();
+        params.putUtfString(Paramskey.CMD, RestaurantCMD.UPDATE_FOOD_COOKING);
+        params = product.toSFSObject(params);
+        this.send(this.cmd,params);
+    }
+    public updateFoodCookDone(product : ProductInOrder){
+        let params = new SFS2X.SFSObject();
+        params.putUtfString(Paramskey.CMD, RestaurantCMD.UPDATE_FOOD_COOK_DONE);
+        params = product.toSFSObject(params);
+        this.send(this.cmd,params);
+    }
+    public updateFoodAmount(product : ProductInOrder){
+        let params = new SFS2X.SFSObject();
+        params.putUtfString(Paramskey.CMD, RestaurantCMD.UPDATE_FOOD_AMOUNT);
+        params = product.toSFSObject(params);
+        this.send(this.cmd,params);
+    }
 }

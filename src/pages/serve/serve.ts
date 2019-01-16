@@ -42,8 +42,8 @@ export class ServePage {
 
   ionViewDidLoad() {
     this.segments = [
-      {id: 1, name: "Món ăn"},
-      {id: 2, name: "Bàn"}
+      { id: 1, name: "Món ăn" },
+      { id: 2, name: "Bàn" }
     ];
     this.mAppModule._loadAppConfig().then(() => {
       RestaurantSFSConnector.getInstance().addListener("ServePage", response => {
@@ -65,30 +65,32 @@ export class ServePage {
       let database = RestaurantClient.getInstance().doBaseDataWithCMDParams(cmd, params);
       if (cmd == RestaurantCMD.GET_PRODUCT_IN_ORDER_COOKING_DONE) {
         this.onResponseGetProductCookingDone(database);
-      }else if(cmd == RestaurantCMD.UPDATE_PRODUCT_IN_ORDER){
+      } else if (cmd == RestaurantCMD.UPDATE_FOOD_AMOUNT) {
         this.onResponseUpdateProductInOrder(database);
+      } else if (cmd == RestaurantCMD.ON_NEW_FOOD_ORDER) {
+        RestaurantSFSConnector.getInstance().getListProductInOrderCookingDone(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
       }
     } else {
       this.mAppModule.showParamsMessage(params);
     }
   }
 
-  onResponseUpdateProductInOrder(database){
+  onResponseUpdateProductInOrder(database) {
     this.mAppModule.showToast("Thao tác thành công");
 
     let info = database.info;
     let p = new ProductInOrder();
     p.fromSFSObject(info);
-    let index = this.mProducts.findIndex(prod=>{
+    let index = this.mProducts.findIndex(prod => {
       return prod.getProduct_id() == p.getProduct_id() && prod.getOrder_id() == p.getOrder_id();
     });
 
-    if(index > -1){
-      this.mProducts.splice(index,1);
+    if (index > -1) {
+      this.mProducts.splice(index, 1);
     }
   }
 
-  onResponseGetProductCookingDone(database){
+  onResponseGetProductCookingDone(database) {
     let array = database.array;
     this.mProducts = RestaurantClient.getInstance().onParseProductInOrder(array);
 
@@ -103,20 +105,20 @@ export class ServePage {
     RestaurantSFSConnector.getInstance().removeListener("ServePage");
   }
 
-  onClickSegment(item){
+  onClickSegment(item) {
     this.segmentID = item.id;
   }
 
-  onClickServe(item: ProductInOrder){
+  onClickServe(item: ProductInOrder) {
     this.mAppModule.showLoading();
-    let amount = item.getCook_done();
-    amount+=item.getCook_done();
-    if(amount > item.getQuantity()){
+    let amount = item.getAmount();
+    amount += item.getCook_done();
+    if (amount > item.getQuantity()) {
       amount = item.getQuantity();
     }
     item.setAmount(amount);
     item.setCook_done(0);
-    RestaurantSFSConnector.getInstance().updateProductInOrder(item);
+    RestaurantSFSConnector.getInstance().updateFoodAmount(item);
   }
 
 }
