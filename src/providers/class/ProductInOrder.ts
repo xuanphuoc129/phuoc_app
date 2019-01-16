@@ -12,7 +12,7 @@ export class ProductInOrder{
 
 	private  cooking_number : number = 0;
 	private  cook_done : number = 0;
-	private table_id: number = -1;
+	private  table_id: number = -1;
 
     constructor(){
 

@@ -37,6 +37,8 @@ export class LoginPage {
   doConnectToServer(){
     RestaurantSFSConnector.getInstance().connect().then(()=>{
       this.onConnectSuccess();
+    }).catch(err=>{
+      this.mAppModule.showToast("Can't connect to server");
     })
   }
 

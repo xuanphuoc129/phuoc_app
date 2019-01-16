@@ -31,9 +31,22 @@ export class ChefServePage {
     public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  doRefresh(refresher) {
+    this.onLoadData();      
+    setTimeout(() => {
+      refresher.complete();
+    }, 2000);
+  }
+
+  onLoadData(){
+    RestaurantSFSConnector.getInstance().getListProductInOrderCooking(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+    RestaurantSFSConnector.getInstance().getListProductInOrderNeed(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+  }
+
+
   ionViewDidLoad() {
-    if (!this.mAppModule.isLogin) {
-      this.navCtrl.setRoot("LoadingPage");
+    if(!this.mAppModule.isLogin){
+      this.mAppModule.goToLoadingPage();
       return;
     }
 
@@ -45,9 +58,7 @@ export class ChefServePage {
       RestaurantSFSConnector.getInstance().addListener("ChefServePage", response => {
         this.onExtension(response);
       })
-
-      RestaurantSFSConnector.getInstance().getListProductInOrderCooking(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
-      RestaurantSFSConnector.getInstance().getListProductInOrderNeed(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+      this.onLoadData();      
     })
   }
 
@@ -74,6 +85,9 @@ export class ChefServePage {
         this.onResponseGetProductNeedCook(database);
       } else if (cmd == RestaurantCMD.UPDATE_PRODUCT_IN_ORDER) {
         this.onUpdateProductInOrderSuccess(params);
+      } else if (cmd == RestaurantCMD.ADD_PRODUCT_INTO_ORDER){
+        this.mAppModule.showToast("Có món mới");
+        this.onLoadData();
       }
     } else {
       this.mAppModule.showParamsMessage(params);
@@ -82,8 +96,7 @@ export class ChefServePage {
 
   onUpdateProductInOrderSuccess(database) {
     this.mAppModule.showToast("Thao tác thành công");
-    RestaurantSFSConnector.getInstance().getListProductInOrderCooking(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
-    RestaurantSFSConnector.getInstance().getListProductInOrderNeed(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+    this.onLoadData();
   }
 
   onResponseGetProductNeedCook(database) {
@@ -144,7 +157,8 @@ export class ChefServePage {
         } else {
           let cooking = item.getCooking_number();
           item.setCooking_number(cooking - quantity);
-          item.setCook_done(quantity);
+          let done = item.getCook_done();
+          item.setCook_done(quantity + done);
           this.mAppModule.showLoading();
           RestaurantSFSConnector.getInstance().updateProductInOrder(item);
         }

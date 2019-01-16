@@ -19,6 +19,11 @@
 
 
 <ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <div class="font-big bold">Trả món</div>
 
   <div class="bg-segment">
@@ -28,44 +33,44 @@
   </div>
 
   <div [hidden]="segmentID == 2">
-      <div class="gray-color" margin padding text-center [hidden]="mProductsNeedCook.length > 0">Chưa có món ăn nào</div>
+    <div class="gray-color" margin padding text-center [hidden]="mProductsNeedCook.length > 0">Chưa có món ăn nào</div>
 
-      <div class="product-container" *ngFor="let item of mProductsNeedCook; let i = index" >
-        <div class="a3-container a3-items-center a1-relative">
-          <div class="stt">{{i+1}}.</div>
-          <div class="text-container">
-            <div class="product-name">{{item.name}} * {{item.getNeedCookNumber() }}</div>
-            <div class="sub-title">Order #{{item.order_id}}</div>
-          </div>
-    
-          <div class="circle-red-color">
-            <button ion-button (click)="onClickItem(item)">Chế biến</button>
-          </div>
-    
+    <div class="product-container" *ngFor="let item of mProductsNeedCook; let i = index">
+      <div class="a3-container a3-items-center a1-relative">
+        <div class="stt">{{i+1}}.</div>
+        <div class="text-container">
+          <div class="product-name">{{item.name}} * {{item.getNeedCookNumber() }}</div>
+          <div class="sub-title">Order #{{item.order_id}}</div>
         </div>
+
+        <div class="circle-red-color">
+          <button ion-button (click)="onClickItem(item)">Chế biến</button>
+        </div>
+
       </div>
-    
+    </div>
+
   </div>
 
   <div [hidden]="segmentID == 1">
-      <div class="gray-color" margin padding text-center [hidden]="mProductsCooking.length > 0">Chưa có món ăn nào</div>
+    <div class="gray-color" margin padding text-center [hidden]="mProductsCooking.length > 0">Chưa có món ăn nào</div>
 
-      <div class="product-container" *ngFor="let item of mProductsCooking; let i = index" >
-        <div class="a3-container a3-items-center a1-relative">
-          <div class="stt">{{i+1}}.</div>
-          <div class="text-container">
-            <div class="product-name">{{item.name}} * {{item.cooking_number }}</div>
-            <div class="sub-title">Order #{{item.order_id}}</div>
-          </div>
-    
-          <div class="circle-red-color">
-            <button ion-button (click)="onClickItemReturn(item)">Trả đồ</button>
-          </div>
-    
+    <div class="product-container" *ngFor="let item of mProductsCooking; let i = index">
+      <div class="a3-container a3-items-center a1-relative">
+        <div class="stt">{{i+1}}.</div>
+        <div class="text-container">
+          <div class="product-name">{{item.name}} * {{item.cooking_number }}</div>
+          <div class="sub-title">Order #{{item.order_id}}</div>
         </div>
+
+        <div class="circle-red-color">
+          <button ion-button (click)="onClickItemReturn(item)">Trả đồ</button>
+        </div>
+
       </div>
-    
+    </div>
+
   </div>
 
-  
+
 </ion-content>

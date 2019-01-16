@@ -20,6 +20,10 @@
 
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <div class="font-big bold">Trả món</div>
 
   <!-- <div class="bg-segment">
@@ -30,7 +34,7 @@
 
   <div class="gray-color" margin padding text-center [hidden]="mProducts.length > 0">Chưa có món ăn nào</div>
 
-  <div class="product-container" *ngFor="let item of mProducts; let i = index" >
+  <div class="product-container" *ngFor="let item of mProducts; let i = index">
     <div class="a3-container a3-items-center a1-relative">
       <div class="stt">{{i+1}}.</div>
       <div class="text-container">

@@ -31,6 +31,15 @@ export class ServePage {
     public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  doRefresh(refresher) {
+    RestaurantSFSConnector.getInstance().getListProductInOrderCookingDone(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+
+    setTimeout(() => {
+      refresher.complete();
+    }, 2000);
+  }
+
+
   ionViewDidLoad() {
     this.segments = [
       {id: 1, name: "Món ăn"},
@@ -71,7 +80,7 @@ export class ServePage {
     let p = new ProductInOrder();
     p.fromSFSObject(info);
     let index = this.mProducts.findIndex(prod=>{
-      return prod.getProduct_id() == p.getProduct_id();
+      return prod.getProduct_id() == p.getProduct_id() && prod.getOrder_id() == p.getOrder_id();
     });
 
     if(index > -1){

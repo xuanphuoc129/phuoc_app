@@ -38,6 +38,13 @@ export class OrderPage {
     this.mFilterId = 1;
   }
 
+  doRefresh(refresher) {
+    RestaurantSFSConnector.getInstance().getListOrder(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+    setTimeout(() => {
+      refresher.complete();
+    }, 2000);
+  }
+
   ionViewDidEnter() {
     this.mNumberDidEnter++;
     if (this.mNumberDidEnter > 1) {
@@ -80,9 +87,14 @@ export class OrderPage {
   }
 
   onLoadOrdersByFilter() {
+    console.log("All orders", this.mAllOrders);
+    
     this.mOrders = this.mAllOrders.filter(o => {
       return o.getStatus() == this.mFilterId;
     })
+
+    console.log("orders", this.mOrders);
+
   }
 
   onResponseGetListOrder(params) {

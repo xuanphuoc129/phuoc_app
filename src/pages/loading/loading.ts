@@ -64,7 +64,6 @@ export class LoadingPage {
 
   onLoginSuccess(params){
     this.mAppModule.onLoginSuccess(params);
-    // this.navCtrl.setRoot("TabsPage");
   }
 
 }

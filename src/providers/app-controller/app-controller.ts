@@ -49,6 +49,10 @@ export class AppControllerProvider {
     this.mStorageController.setStorage(this.mStorage);
   }
 
+  public goToLoadingPage(){
+    this.mApp.getRootNav().setRoot("LoadingPage");
+  }
+
   public showRadio(title: string, arrayInput: Array<{ id: any, name: string }>, idselected: any, callback: any) {
     let alert = this.mAlertController.create();
     alert.setTitle(title);

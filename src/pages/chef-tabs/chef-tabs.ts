@@ -23,7 +23,7 @@ export class ChefTabsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChefTabsPage');
+    
   }
 
 }
