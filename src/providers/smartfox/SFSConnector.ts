@@ -360,6 +360,13 @@ export class RestaurantSFSConnector extends SFSConnector {
         this.send(this.cmd,params);
     }
 
+    public getListTablesIsServe(restaurant_id : number){
+        let params = new SFS2X.SFSObject();
+        params.putUtfString(Paramskey.CMD, RestaurantCMD.GET_LIST_TABLE_IS_SERVE);
+        params.putInt(Paramskey.RESTAURANT_ID,restaurant_id);
+        this.send(this.cmd,params);
+    }
+
     public getTopProductInRestaurant(restaurant_id : number){
         let params = new SFS2X.SFSObject();
         params.putUtfString(Paramskey.CMD, RestaurantCMD.GET_TOP_PRODUCT_IN_RESTAURANT);
@@ -397,8 +404,9 @@ export class RestaurantSFSConnector extends SFSConnector {
 
     public removeOrder(order_id){
         let params = new SFS2X.SFSObject();
-        params.putUtfString(Paramskey.CMD, RestaurantCMD.REMOVE_ORDER);
+        params.putUtfString(Paramskey.CMD, RestaurantCMD.UPDATE_ORDER_STATUS);
         params.putInt(Paramskey.ORDER_ID,order_id);
+        params.putInt(Paramskey.STATUS,3);
         this.send(this.cmd,params);
     }
 

@@ -5,6 +5,9 @@ import { Floors } from '../../providers/class/Floors';
 import { Tables } from '../../providers/class/Tables';
 import { RestaurantManager } from '../../providers/app-controller/RestaurantManager';
 import { OrderManager } from '../../providers/app-controller/OrderManager';
+import { RestaurantSFSConnector } from '../../providers/smartfox/SFSConnector';
+import { RestaurantClient } from '../../providers/smartfox/RestaurantClient';
+import { RestaurantCMD } from '../../providers/smartfox/RestaurantCMD';
 
 /**
  * Generated class for the SelectTableToOrderPage page.
@@ -45,13 +48,52 @@ export class SelectTableToOrderPage {
         this.mTableSelected.fromObject(table);
       }
     }
-
-    
     
   }
 
   ionViewDidLoad() {
     this.onLoadTables();
+
+    RestaurantSFSConnector.getInstance().addListener("SelectTableToOrderPage",response=>{
+      this.onExtions(response);
+    })
+
+    RestaurantSFSConnector.getInstance().getListTablesIsServe(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+  }
+
+  ionViewWillUnload(){
+    RestaurantSFSConnector.getInstance().removeListener("SelectTableToOrderPage");
+  }
+
+  onExtions(response){
+    let cmd = response.cmd;
+    let params = response.params;
+
+    if(RestaurantClient.getInstance().doCheckStatusParams(params)){
+      let database = RestaurantClient.getInstance().doBaseDataWithCMDParams(cmd,params);
+      if(cmd == RestaurantCMD.GET_LIST_TABLE_IS_SERVE){
+        this.onResponseGetListTableIsServe(database);
+      }
+    }else{
+      this.mAppModule.showParamsMessage(params);
+    }
+  }
+
+  onResponseGetListTableIsServe(database){
+    let tables = RestaurantManager.getInstance().getTables();
+
+    database.forEach(element => {
+      for (let index = 0; index < tables.length; index++) {
+        const _table = tables[index];
+        if(_table.getTable_id() == element.getTable_id()){
+          _table.setStatus(2);
+          break;
+        }
+      }
+    });
+
+    this.onLoadTables();
+   
   }
 
   onLoadTables(){
@@ -77,6 +119,9 @@ export class SelectTableToOrderPage {
   }
 
   onClickTable(table: Tables){
+    if(table.getStatus() == 2){
+      return;
+    }
     this.mTableSelected = table;
   }
 

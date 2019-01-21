@@ -105,5 +105,7 @@ export class RestaurantCMD {
 	public static UPDATE_FOOD_COOK_DONE = "update_food_cook_done";
 	public static UPDATE_FOOD_AMOUNT = "update_food_amount";
 
+	public static GET_LIST_TABLE_IS_SERVE = "get_list_table_is_serve";
+	public static UPDATE_ORDER_STATUS = "update_order_status";
 	constructor() { }
 }

@@ -13,10 +13,33 @@ export class ProductInOrder{
 	private  cooking_number : number = 0;
 	private  cook_done : number = 0;
 	private  table_id: number = -1;
+	private  restaurant_id : number = -1;
+
+	private time_update: number = -1;
 
     constructor(){
 
 	}
+
+	
+
+	public getTime_update() : number {
+		return this.time_update;
+	}
+
+	public setTime_update(time_update : number) {
+		this.time_update = time_update;
+	}
+
+
+	public getRestaurant_id() {
+		return this.restaurant_id;
+	}
+
+	public  setRestaurant_id( restaurant_id) {
+		this.restaurant_id = restaurant_id;
+	}
+	
 
 	public getNeedCookNumber(){
 		return this.quantity - this.amount - this.cook_done - this.cooking_number;
@@ -39,6 +62,7 @@ export class ProductInOrder{
 		o.putInt(Paramskey.COOKING_NUMBER, this.getCooking_number());
 		o.putInt(Paramskey.COOK_DONE, this.getCook_done());
 		o.putInt(Paramskey.TABLE_ID, this.getTable_id());
+		o.putInt(Paramskey.RESTAURANT_ID, this.getRestaurant_id());
 		return o;
 	}
 	
@@ -80,9 +104,18 @@ export class ProductInOrder{
 		}
 		if (o.containsKey(Paramskey.TABLE_ID)) {
             this.setTable_id(o.getInt(Paramskey.TABLE_ID));
-        }
+		}
+		
+		if(o.containsKey(Paramskey.RESTAURANT_ID)) {
+			this.setRestaurant_id(o.getInt(Paramskey.RESTAURANT_ID));
+		}
 
+		if(o.containsKey(Paramskey.TIME_UPDATE)) {
+			this.setTime_update(o.getLong(Paramskey.TIME_UPDATE));
+		}
 	}
+
+
 	public getTable_id() {
         return this.table_id;
     }

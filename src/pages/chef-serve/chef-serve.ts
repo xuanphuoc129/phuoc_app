@@ -26,26 +26,35 @@ export class ChefServePage {
   mProductsCooking: Array<ProductInOrder> = [];
   mProductsNeedCook: Array<ProductInOrder> = [];
 
+  mNumberDidEnter: number = 0;
   constructor(
     public mAppModule: AppControllerProvider,
     public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  ionViewDidEnter() {
+    this.mNumberDidEnter++;
+
+    if (this.mNumberDidEnter > 1) {
+      this.onLoadData();
+    }
+  }
+
   doRefresh(refresher) {
-    this.onLoadData();      
+    this.onLoadData();
     setTimeout(() => {
       refresher.complete();
     }, 2000);
   }
 
-  onLoadData(){
+  onLoadData() {
     RestaurantSFSConnector.getInstance().getListProductInOrderCooking(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
     RestaurantSFSConnector.getInstance().getListProductInOrderNeed(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
   }
 
 
   ionViewDidLoad() {
-    if(!this.mAppModule.isLogin){
+    if (!this.mAppModule.isLogin) {
       this.mAppModule.goToLoadingPage();
       return;
     }
@@ -58,7 +67,7 @@ export class ChefServePage {
       RestaurantSFSConnector.getInstance().addListener("ChefServePage", response => {
         this.onExtension(response);
       })
-      this.onLoadData();      
+      this.onLoadData();
     })
   }
 
@@ -88,7 +97,7 @@ export class ChefServePage {
       } else if (cmd == RestaurantCMD.UPDATE_FOOD_COOK_DONE) {
         this.onUpdateProductInOrderSuccess(params);
       }
-      else if (cmd == RestaurantCMD.ON_NEW_FOOD_ORDER){
+      else if (cmd == RestaurantCMD.ON_NEW_FOOD_ORDER) {
         this.mAppModule.showToast("New food update");
         this.onLoadData();
       }
@@ -106,67 +115,100 @@ export class ChefServePage {
     this.mProductsNeedCook = RestaurantClient.getInstance().onParseProductInOrder(database.array);
     this.mProductsNeedCook.forEach(element => {
       let p = RestaurantManager.getInstance().getProductInfo(element.getProduct_id());
+      p.setRestaurant_id(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
       element.setName(p.getName());
     });
+
+    this.mProductsNeedCook.sort((a,b)=>{
+      return a.getTime_update() - b.getTime_update();
+    })
+    this.mAppModule.mNeedCookNumber = this.mProductsNeedCook.length;
   }
 
   onResponseGetProductCooking(database) {
     this.mProductsCooking = RestaurantClient.getInstance().onParseProductInOrder(database.array);
     this.mProductsCooking.forEach(element => {
       let p = RestaurantManager.getInstance().getProductInfo(element.getProduct_id());
+      p.setRestaurant_id(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
       element.setName(p.getName());
     });
   }
 
   onClickItem(item: ProductInOrder) {
-    let alert = this.mAppModule.getAlertController().create();
-    alert.setTitle("Nhập số lượng");
-    alert.addInput({
-      placeholder: "Nhập số lượng muốn chế biến",
-      name: "quantity",
-      value: item.getNeedCookNumber() + ""
-    });
-    alert.addButton({
-      text: "Ok",
-      handler: data => {
-        let quantity = parseInt(data.quantity);
-        if (quantity > item.getNeedCookNumber()) {
-          this.mAppModule.showToast("Số lượng chế biến vượt quá giới hạn");
-        } else {
-          let cooking = item.getCooking_number();
-          item.setCooking_number(cooking + quantity);
-          this.mAppModule.showLoading();
-          RestaurantSFSConnector.getInstance().updateFoodCooking(item);
+    if (item.getNeedCookNumber() == 1) {
+      let cooking = item.getCooking_number();
+      item.setCooking_number(cooking + 1);
+      item.setRestaurant_id(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+      this.mAppModule.showLoading();
+      RestaurantSFSConnector.getInstance().updateFoodCooking(item);
+
+    } else {
+      let alert = this.mAppModule.getAlertController().create();
+      alert.setTitle("Nhập số lượng");
+      alert.addInput({
+        type: "number",
+        placeholder: "Nhập số lượng muốn chế biến",
+        name: "quantity",
+        value: item.getNeedCookNumber() + ""
+      });
+      alert.addButton({
+        text: "Ok",
+        handler: data => {
+          let quantity = parseInt(data.quantity);
+          if (quantity > item.getNeedCookNumber()) {
+            this.mAppModule.showToast("Số lượng chế biến vượt quá giới hạn");
+          } else {
+            let cooking = item.getCooking_number();
+            item.setCooking_number(cooking + quantity);
+            item.setRestaurant_id(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+            this.mAppModule.showLoading();
+            RestaurantSFSConnector.getInstance().updateFoodCooking(item);
+          }
         }
-      }
-    });
-    alert.present();
+      });
+      alert.present();
+    }
+
   }
 
-  onClickItemReturn(item: ProductInOrder){
-    let alert = this.mAppModule.getAlertController().create();
-    alert.setTitle("Nhập số lượng");
-    alert.addInput({
-      placeholder: "Nhập số lượng muốn trả",
-      name: "quantity",
-      value: item.getCooking_number() + ""
-    });
-    alert.addButton({
-      text: "Ok",
-      handler: data => {
-        let quantity = parseInt(data.quantity);
-        if (quantity > item.getCooking_number()) {
-          this.mAppModule.showToast("Số lượng trả vượt quá giới hạn");
-        } else {
-          let cooking = item.getCooking_number();
-          item.setCooking_number(cooking - quantity);
-          let done = item.getCook_done();
-          item.setCook_done(quantity + done);
-          this.mAppModule.showLoading();
-          RestaurantSFSConnector.getInstance().updateFoodCookDone(item);
+  onClickItemReturn(item: ProductInOrder) {
+    if(item.getCooking_number() == 1){
+      let cooking = item.getCooking_number();
+      item.setCooking_number(cooking - 1);
+      let done = item.getCook_done();
+      item.setCook_done(1 + done);
+      item.setRestaurant_id(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+      this.mAppModule.showLoading();
+      RestaurantSFSConnector.getInstance().updateFoodCookDone(item);
+    }else{
+      let alert = this.mAppModule.getAlertController().create();
+      alert.setTitle("Nhập số lượng");
+      alert.addInput({
+        type: "number",
+        placeholder: "Nhập số lượng muốn trả",
+        name: "quantity",
+        value: item.getCooking_number() + ""
+      });
+      alert.addButton({
+        text: "Ok",
+        handler: data => {
+          let quantity = parseInt(data.quantity);
+          if (quantity > item.getCooking_number()) {
+            this.mAppModule.showToast("Số lượng trả vượt quá giới hạn");
+          } else {
+            let cooking = item.getCooking_number();
+            item.setCooking_number(cooking - quantity);
+            let done = item.getCook_done();
+            item.setCook_done(quantity + done);
+            item.setRestaurant_id(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+            this.mAppModule.showLoading();
+            RestaurantSFSConnector.getInstance().updateFoodCookDone(item);
+          }
         }
-      }
-    });
-    alert.present();
+      });
+      alert.present();
+    }
+
+    
   }
 }

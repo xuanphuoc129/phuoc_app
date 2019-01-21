@@ -194,6 +194,8 @@ export class SelectFoodToOrderPage {
         let _product = RestaurantManager.getInstance().getProductInfo(p.getProduct_id());
         p.setQuantity(p.getQuantity() + element.quantity);
         p.setTotal_money(_product.getPrice() * p.getQuantity());
+        p.setRestaurant_id(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+
         updateProduct.push(p);
         this.mNumberUpdate++;
 
@@ -202,6 +204,7 @@ export class SelectFoodToOrderPage {
         let newProductInOrder = new ProductInOrder();
         newProductInOrder.fromProductInModels(element);
         newProductInOrder.setOrder_id(this.mOrder.getOrder_id());
+        newProductInOrder.setRestaurant_id(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
         newProduct.push(newProductInOrder);
         this.products.push(newProductInOrder);
       }

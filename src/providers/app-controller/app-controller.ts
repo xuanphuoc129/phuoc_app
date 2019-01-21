@@ -35,6 +35,10 @@ export class AppControllerProvider {
   private mRestaurantOfUser: Array<RestaurantOfUser> = [];
 
   mLoading: Loading;
+
+  mCookeDoneNumber : number = 0;
+  mNeedCookNumber : number = 0;
+
   constructor(
     public mLoadingController: LoadingController,
     public mEventController: Events,
@@ -281,7 +285,11 @@ export class AppControllerProvider {
         RestaurantManager.getInstance().setAreas(dataBase);
       } else if (cmd == RestaurantCMD.GET_LIST_TABLE_IN_RESTAURANT) {
         RestaurantManager.getInstance().setTables(dataBase);
-      } 
+      } else if (cmd == RestaurantCMD.UPDATE_FOOD_COOK_DONE){
+        this.mCookeDoneNumber = dataBase["total"];       
+      } else if (cmd == RestaurantCMD.ON_NEW_FOOD_ORDER){
+        this.mNeedCookNumber = dataBase["total"];
+      }
     } else {
       // this.showToast(params.getUtfString(Paramskey.MESSAGE));
     }

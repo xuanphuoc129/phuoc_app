@@ -49,6 +49,12 @@ page-select-table-to-order {
                 box-shadow: 0 6px 12px rgba($color: map-get($map: $appColors, $key: primary), $alpha: .2);
                 font-weight: bold;
             }
+            &.red{
+                background: map-get($map: $appColors, $key: red);
+                color: white;
+                box-shadow: 0 6px 12px rgba($color: map-get($map: $appColors, $key: red), $alpha: .2);
+                font-weight: bold;
+            }
         }
     }
 

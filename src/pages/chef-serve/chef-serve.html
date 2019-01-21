@@ -40,7 +40,7 @@
         <div class="stt">{{i+1}}.</div>
         <div class="text-container">
           <div class="product-name">{{item.name}} * {{item.getNeedCookNumber() }}</div>
-          <div class="sub-title">Order #{{item.order_id}}</div>
+          <div class="sub-title">Order #{{item.order_id}} - {{item.time_update | timeServe}}</div>
         </div>
 
         <div class="circle-red-color">

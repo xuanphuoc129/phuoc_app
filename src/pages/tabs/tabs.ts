@@ -45,14 +45,18 @@ export class TabsPage {
 
     if(RestaurantClient.getInstance().doCheckStatusParams(params)){
       let data = RestaurantClient.getInstance().doBaseDataWithCMDParams(cmd,params);
-      if(cmd == RestaurantCMD.ON_NEW_FOOD_ORDER){
+      if(cmd == RestaurantCMD.UPDATE_FOOD_COOK_DONE){
         this.onLoadFood();
       }else if(cmd == RestaurantCMD.GET_PRODUCT_IN_ORDER_COOKING_DONE){
-        let array = data.array;
-        this.countCarItem = array.size();
+        this.onGetListOrderCooking(data);
       }
     }
     
+  }
+
+  onGetListOrderCooking(params){
+    let array = params.array;
+    this.countCarItem = array.size();
   }
 
 }

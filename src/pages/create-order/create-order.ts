@@ -84,6 +84,7 @@ export class CreateOrderPage {
       let mProductInOrder = new ProductInOrder();
       mProductInOrder.fromProductInModels(element);
       mProductInOrder.setOrder_id(this.mOrder.getOrder_id());
+      mProductInOrder.setRestaurant_id(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
       array.push(mProductInOrder);
     })
     this.mAppModule.showLoading();
@@ -91,7 +92,7 @@ export class CreateOrderPage {
   }
 
   onResponseAddProductInOrder(database){
-    this.mAppModule.showParamsMessage(database);
+    this.mAppModule.showToast("Tạo order thành công");
     this.mViewController.dismiss(1);
   }
 

@@ -52,7 +52,7 @@
     <div class="floor-name">{{item.floor.name}}</div>
     <ion-row>
       <ion-col col-3 *ngFor="let table of item.tables">
-        <div class="table-item" [class.selected]="table.table_id == mTableSelected.table_id" (click)="onClickTable(table)" text-center tappable>{{table.name}}</div>
+        <div class="table-item" [class.red]="table.status == 2 && table.table_id != mTableSelected.table_id" [class.selected]="table.table_id == mTableSelected.table_id" (click)="onClickTable(table)" text-center tappable>{{table.name}}</div>
       </ion-col>
     </ion-row>
   </div>

@@ -93,7 +93,7 @@
 
     <div class="list-item">
       <div class="product-container" *ngFor="let item of products; let i = index">
-        <div class="a3-container a3-items-center">
+        <div class="a3-container a3-items-center a1-relative">
           <div class="stt">{{i+1}}.</div>
           <div class="pro-thumnail a3-container-center" [hidden]="item.thumnail">
             <ion-icon name="ios-image-outline"></ion-icon>
@@ -106,10 +106,14 @@
             <div class="product-name">{{item.name}}</div>
             <div class="product-price">SL : {{item.amount}}/{{item.quantity}}</div>
           </div>
+
+          <div class="right-price">{{item.total_money | number}}đ</div>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="total_money_number" text-right margin-top>Tạm tính: {{mOrder.total_money | number}}</div>
 
 </ion-content>
 

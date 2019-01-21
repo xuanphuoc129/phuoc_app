@@ -8,6 +8,7 @@ import { Areas } from "../class/Areas";
 import { Tables } from "../class/Tables";
 import { Orders } from "../class/Orders";
 import { ProductInOrder } from "../class/ProductInOrder";
+import { Paramskey } from "./Paramkeys";
 
 export class RestaurantClient extends SfsClientBaseExtension{
     public static _instance : RestaurantClient = null;
@@ -51,7 +52,7 @@ export class RestaurantClient extends SfsClientBaseExtension{
             return this.doParseInfo(params);
         }
         else if(cmd == RestaurantCMD.ADD_PRODUCT_INTO_ORDER){
-            return params;
+            return this.doParseUpdateFoodCookDoneParams(params);
         }
         else if(cmd == RestaurantCMD.GET_LIST_ORDER_TODAY){
             return this.doParseArrayExtensions(params);
@@ -83,6 +84,25 @@ export class RestaurantClient extends SfsClientBaseExtension{
         else if(cmd == RestaurantCMD.GET_STAFF_INFO){
             return this.doParseInfo(params);
         }
+        else if(cmd == RestaurantCMD.UPDATE_FOOD_COOK_DONE){
+            return this.doParseUpdateFoodCookDoneParams(params);
+        }
+        else if(cmd == RestaurantCMD.ON_NEW_FOOD_ORDER){
+            return this.doParseUpdateFoodCookDoneParams(params);
+        }
+        else if(cmd == RestaurantCMD.UPDATE_FOOD_AMOUNT){
+            return this.doParseInfo(params);
+        }
+        else if(cmd == RestaurantCMD.GET_LIST_TABLE_IS_SERVE){
+            return this.onParseGET_LIST_TABLE_IN_RESTAURANT(params);
+        }
+       
+    }
+
+    public doParseUpdateFoodCookDoneParams(params){
+        let content = params.getSFSObject(Paramskey.CONTENT);
+        let total = content.getInt(Paramskey.TOTAL);
+        return {total: total, content: content};
     }
 
 

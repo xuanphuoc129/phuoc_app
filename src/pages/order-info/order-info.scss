@@ -87,14 +87,14 @@ page-order-info {
 
   .product-name {
     font-size: 1.3rem;
-    font-weight: 500;
+    font-weight: bold;
     text-transform: capitalize;
     color: map-get($map: $appColors, $key: dark);
   }
 
   .product-price {
     margin-top: 4px;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: map-get($map: $appColors, $key: orange);
     font-weight: 500;
   }
@@ -105,6 +105,23 @@ page-order-info {
     border-radius: 5px;
     background: white;
     margin-top: 16px;
+  }
+
+  .right-price{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: right;
+    color: map-get($map: $appColors, $key: gray);
+
+  }
+
+  .total_money_number{
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    color: map-get($map: $appColors, $key: red);
   }
 
   .stt{

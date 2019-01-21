@@ -46,7 +46,7 @@ export class UserPage {
       this.mAppModule.logout().then(()=>{
         this.mAppModule.isLogin = false;
         RestaurantSFSConnector.getInstance()._Disconnect().then(()=>{
-            this.mApp.getRootNav().setRoot("LoginPage");
+            this.mAppModule.goToLoadingPage();
         })
       })
     }

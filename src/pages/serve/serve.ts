@@ -26,9 +26,19 @@ export class ServePage {
 
   mProducts: Array<ProductInOrder> = [];
 
+  mNumberDidEnter: number = 0;
+
   constructor(
     public mAppModule: AppControllerProvider,
     public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  ionViewDidEnter() {
+    this.mAppModule.mCookeDoneNumber = 0;
+    this.mNumberDidEnter++;
+    if (this.mNumberDidEnter > 1) {
+      RestaurantSFSConnector.getInstance().getListProductInOrderCookingDone(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+    }
   }
 
   doRefresh(refresher) {
@@ -67,8 +77,6 @@ export class ServePage {
         this.onResponseGetProductCookingDone(database);
       } else if (cmd == RestaurantCMD.UPDATE_FOOD_AMOUNT) {
         this.onResponseUpdateProductInOrder(database);
-      } else if (cmd == RestaurantCMD.ON_NEW_FOOD_ORDER) {
-        RestaurantSFSConnector.getInstance().getListProductInOrderCookingDone(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
       }
     } else {
       this.mAppModule.showParamsMessage(params);
@@ -87,6 +95,7 @@ export class ServePage {
 
     if (index > -1) {
       this.mProducts.splice(index, 1);
+      // this.mAppModule.mCookeDoneNumber--;
     }
   }
 
@@ -98,6 +107,8 @@ export class ServePage {
       let p = RestaurantManager.getInstance().getProductInfo(element.getProduct_id());
       element.setName(p.getName());
     });
+
+    this.mAppModule.mCookeDoneNumber = this.mProducts.length;
   }
 
 

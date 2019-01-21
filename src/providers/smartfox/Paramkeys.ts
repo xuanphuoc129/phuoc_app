@@ -63,5 +63,7 @@ export class Paramskey {
 
 	public static COOKING_NUMBER = "cooking_number";
 	public static COOK_DONE = "cook_done";
+	public static TOTAL = "total";
+	public static TIME_UPDATE = "time_update";
 	constructor() { }
 }

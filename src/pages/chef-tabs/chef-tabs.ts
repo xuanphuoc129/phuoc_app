@@ -30,9 +30,11 @@ export class ChefTabsPage {
     public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  public onLoadFood(){
-    RestaurantSFSConnector.getInstance().getListProductInOrderNeed(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
-  }
+  // public onLoadFood(params){
+  //   console.log("total", params.total);
+    
+  //   RestaurantSFSConnector.getInstance().getListProductInOrderNeed(this.mAppModule.getRestaurantOfUser().getRestaurant_id());
+  // }
 
 
   ionViewDidLoad() {
@@ -41,20 +43,24 @@ export class ChefTabsPage {
     // })
   }
 
-  onExtensions(response){
-    let cmd = response.cmd;
-    let params = response.params;
+  // onExtensions(response){
+  //   let cmd = response.cmd;
+  //   let params = response.params;
 
-    if(RestaurantClient.getInstance().doCheckStatusParams(params)){
-      let data = RestaurantClient.getInstance().doBaseDataWithCMDParams(cmd,params);
-      if(cmd == RestaurantCMD.ON_NEW_FOOD_ORDER){
-        this.onLoadFood();
-      }else if(cmd == RestaurantCMD.GET_PRODUCT_IN_ORDER_YET){
-        let array = data.array;
-        this.countCarItem = array.size();
-      }
-    }
+  //   if(RestaurantClient.getInstance().doCheckStatusParams(params)){
+  //     let data = RestaurantClient.getInstance().doBaseDataWithCMDParams(cmd,params);
+  //     if(cmd == RestaurantCMD.ON_NEW_FOOD_ORDER){
+  //       this.onLoadFood(data);
+  //     }else if(cmd == RestaurantCMD.GET_PRODUCT_IN_ORDER_YET){
+  //       this.onGetListOrderNeedCook(data);
+  //     }
+  //   }
     
-  }
+  // }
+
+  // onGetListOrderNeedCook(params){
+  //   let array = params.array;
+  //   this.countCarItem = array.size();
+  // }
 
 }
